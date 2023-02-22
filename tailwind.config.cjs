@@ -3,8 +3,12 @@ module.exports = {
 	content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
 	theme: {
 		screens: {
-			xl: '1600px',
-			md: '1024px',
+			desktop: '1600px',
+			hd: '1200px',
+			laptop: '1024px',
+			md: '900px',
+			tablet: '640px',
+			phone: '320px'
 		},
 		extend: {
 			colors: {
@@ -14,6 +18,12 @@ module.exports = {
 			boxShadow: {
 				'3xl': '0px 6px 8px rgba(0, 0, 0, 0.2)',
 			},
+			keyframes: {
+				menuAnim: {
+					'0%': { transform: 'translateX(150px)'},
+					'100%': { transform: 'translateX(-150px)'},
+				}
+			}
 		},
 	},
 	plugins: [],

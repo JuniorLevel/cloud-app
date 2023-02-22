@@ -3,27 +3,29 @@
 @tailwind utilities;
 
 @font-face {
-	font-family: 'Roboto';
-	src: url('../src/fonts/Roboto-Regular.ttf') format('ttf');
+  font-family: "Roboto";
+  src: url("../src/fonts/Roboto-Regular.ttf") format("ttf");
 }
 
 @font-face {
-	font-family: 'Comfortaa';
-	src: url('../src/fonts/Comfortaa-Regular.ttf') format('ttf');
+  font-family: "Comfortaa";
+  src: url("../src/fonts/Comfortaa-Regular.ttf") format("ttf");
 }
 
 @font-face {
-	font-family: 'Montserrat';
-	src: url('../src/fonts/Montserrat-Regular.ttf') format('ttf');
+  font-family: "Montserrat";
+  src: url("../src/fonts/Montserrat-Regular.ttf") format("ttf");
 }
 
 body {
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
-	background: url('../src/images/home-page/home-bg.png') 0 0 / cover no-repeat;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-image: url("../src/images/home-page/home-bg.png");
+  background-repeat: no-repeat;
+  background-position: right top;
 }
 
 svg {
-	display: flex;
-	align-items: center;
+  display: flex;
+  align-items: center;
 }
