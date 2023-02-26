@@ -1,3 +1,7 @@
 export const Layout = ({ children }) => {
-  return <div className="mx-auto px-4 md:pt-14 min-h-screen">{children}</div>;
+  return (
+    <div className="max-w-[1620px] px-[10px] mx-auto min-h-screen">
+      {children}
+    </div>
+  );
 };

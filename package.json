@@ -5,7 +5,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "prettier": "^2.8.4",
+    "prettier": "2.8.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "yarn": "^1.22.19"
@@ -19,5 +19,11 @@
     "tailwind": "^4.0.0",
     "tailwindcss": "^3.2.6",
     "vite": "^4.1.0"
-  }
+  },
+  "name": "cloud-app",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:JuniorLevel/cloud-app.git",
+  "author": "Junior <work.junior@mail.ru>",
+  "license": "MIT"
 }

@@ -22,7 +22,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-image: url("../src/images/home-page/home-bg.png");
   background-repeat: no-repeat;
-  background-position: right top;
+  background-position: top center;
 }
 
 svg {

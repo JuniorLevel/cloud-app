@@ -4,9 +4,9 @@ module.exports = {
 	theme: {
 		screens: {
 			desktop: '1600px',
-			hd: '1200px',
+			hd: '1220px',
 			laptop: '1024px',
-			md: '900px',
+			md: '980px',
 			tablet: '640px',
 			phone: '320px'
 		},

@@ -10,24 +10,24 @@ const Hamburger = ({ isOpen = false }) => {
         }`}
       ></div>
       <div
-        className={`absolute top-0 right-0 bg-[black] justify-center w-1/2 z-20 opacity-90 min-h-[150vh] ${
+        className={`absolute top-0 right-0 bg-[#7862e5] justify-center w-1/2 z-20 opacity-90 min-h-[150vh] ${
           isOpen ? "flex" : "hidden"
         }`}
       >
-        <nav className="my-[150px] mx-5 text-center space-y-5 text-lg w-full">
+        <nav className="my-[150px] mx-5 text-center space-y-5 text-lg">
           <NavItem text="Home" />
           <NavItem text="Pricing" />
           <NavItem text="Contact" />
           <Button
             text="login"
             styles={
-              "w-[132px] h-[36px] uppercase text-[white] font-[500] hover:font-[700]"
+              "w-[132px] h-[36px] uppercase rounded-[30px] text-[white] font-[500] hover:font-[700] hover:bg-[white] hover:text-[#bf71f6]"
             }
           ></Button>
           <Button
             text="sign up"
             styles={
-              "w-[132px] h-[36px] text-[#bf71f6] bg-white rounded-[30px] px-[16px] py-[5px] uppercase font-[500] hover:bg-transparent hover:font-[700] hover:text-[white]"
+              "w-[132px] h-[36px] text-[#bf71f6] bg-white rounded-[30px] px-[16px] py-[5px] uppercase font-[500] hover:bg-transparent"
             }
           ></Button>
         </nav>

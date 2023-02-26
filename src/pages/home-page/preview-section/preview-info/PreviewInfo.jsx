@@ -3,7 +3,7 @@ import { Title } from "../../../../components/title/Title";
 import { Button } from "../../../../components/ui/Button";
 export const PreviewInfo = () => {
   return (
-    <div className="text-center text-lg order-last w-[100%] mt-[33px] hd:text-start hd:w-[35%] hd:order-1">
+    <div className="text-center text-lg order-last mt-[33px] hd:text-start hd:w-[35%] hd:order-1 desktop:flex-[0_1_40%]">
       <Title>{`Personal\n and Business`}</Title>
       <SubTitle />
       <h3 className="text-[20px] font-[Roboto] font-medium md:text-[26px] leading-[156%] mb-[13px] uppercase text-title-color">
