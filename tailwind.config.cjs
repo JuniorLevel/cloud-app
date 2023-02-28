@@ -23,6 +23,11 @@ module.exports = {
 					'0%': { transform: 'translateX(150px)'},
 					'100%': { transform: 'translateX(-150px)'},
 				}
+			},
+			backgroundImage: {
+				'advBg': "url('../src/images/home-page/adv-bg.png')",
+				'svgBg': "url('../src/images/home-page/svg/svg-bg.svg')",
+				'mobBg': "url('../src/images/home-page/mobile-bg.png')"
 			}
 		},
 	},
