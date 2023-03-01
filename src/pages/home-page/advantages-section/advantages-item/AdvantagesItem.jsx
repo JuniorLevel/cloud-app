@@ -1,6 +1,6 @@
 const AdvantagesItem = (props) => {
   return (
-    <div className="flex gap-[30px] mb-[35px] tablet:mb-[50px]">
+    <div className="flex gap-[30px] mb-[35px] tablet:mb-[50px] last:mb-0">
       <div className="hidden tablet:flex justify-center items-center min-w-[93px] h-[93px] bg-svgBg">
         <img src={props.src} alt="icon-svg" />
       </div>

@@ -1,13 +1,15 @@
 import { Header } from "../../components/header/Header";
 import { PreviewSection } from "./preview-section/PreviewSection";
-import { Layout } from "../../components/layout/Layout";
 import AdvantagesSection from "./advantages-section/AdvantagesSection";
+import PricingSection from "./pricing-section/PricingSection";
+import Wrapper from "../../components/layouts/Wrapper";
 export const HomePage = () => {
   return (
-    <Layout>
+    <Wrapper>
       <Header />
       <PreviewSection />
       <AdvantagesSection />
-    </Layout>
+      <PricingSection />
+    </Wrapper>
   );
 };

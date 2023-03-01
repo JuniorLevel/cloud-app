@@ -1,10 +1,12 @@
-export const Title = ({ children }) => {
+export const Title = (props) => {
   return (
-    <h1 className="text-[54px] tablet:text-[70px] whitespace-pre-line text-title-color uppercase desktop:text-[72px] font-black leading-[70px] mb-[15px]">
-      {children}
+    <h1 className="text-center text-title-color text-[72px] uppercase mb-[15px]">
+      {props.text}
     </h1>
   );
 };
+
+// font-[300] tracking-[0.285em]
 
 // font-family: 'Roboto';
 // font-style: normal;

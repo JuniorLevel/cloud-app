@@ -4,7 +4,7 @@ import { Button } from "../../../../components/ui/Button";
 export const PreviewInfo = () => {
   return (
     <div className="text-center text-lg order-last mt-[33px] hd:text-start hd:w-[35%] hd:order-1 desktop:flex-[0_1_45%]">
-      <Title>{`Personal\n and Business`}</Title>
+      <h1 className="text-[54px] tablet:text-[70px] whitespace-pre-line text-title-color uppercase desktop:text-[72px] font-black leading-[70px] mb-[15px]">{`Personal\n and Business`}</h1>
       <SubTitle />
       <h3 className="text-[20px] font-[Roboto] font-medium md:text-[26px] leading-[156%] mb-[13px] uppercase text-title-color">
         STORE AND MANAGE ALL YOUR Files!
