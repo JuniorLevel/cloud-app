@@ -22,8 +22,10 @@ export default {
       '2xl': { min: '1280px' },
     },
     backgroundImage: {
-      gradient: 'linear-gradient(90deg, #43A1D6 0%, #907EFF 100%)',
-      accordionGradient: 'linear-gradient(90deg, #B1E3FF 0%, #DFBEFF 100%)',
+      gradient: 'linear-gradient(90deg, #47A1D6 30%, #907EFF 100%)',
+      accordionGradient: 'linear-gradient(90deg, #B1E3FF 30%, #DFBEFF 100%)',
+      hoverGradient:
+        'linear-gradient(90deg, rgba(11,125,214,1) 10%, rgba(194,136,255,1) 100%);',
     },
     fontFamily: {
       Comfortaa: ['Comfortaa', 'sans-serif'],
@@ -32,6 +34,9 @@ export default {
     },
     borderRadius: {
       round: '45px',
+    },
+    boxShadow: {
+      cardShadow: '4px 22px 22px rgba(0, 0, 0, 0.2)',
     },
     extend: {},
   },

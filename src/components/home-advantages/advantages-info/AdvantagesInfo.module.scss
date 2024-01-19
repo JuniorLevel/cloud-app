@@ -1,0 +1,19 @@
+.advantages {
+  @apply max-w-[600px];
+  li {
+    @apply mb-10 last:mb-0;
+  }
+}
+
+.advantagesIcon {
+  @apply relative;
+  &::before {
+    content: '';
+    @apply absolute w-[90px] h-[90px] top-[-20px] left-[-20px];
+    background-image: url('/images/home/icons/icon-bg.png');
+    background-size: cover;
+    background-position: top center;
+    background-repeat: no-repeat;
+    z-index: -1;
+  }
+}
