@@ -1,0 +1,9 @@
+.headerNav {
+  @apply flex-auto;
+  ul {
+    @apply flex gap-[70px];
+    li {
+      @apply duration-500 transition hover:text-title;
+    }
+  }
+}

@@ -1,4 +1,4 @@
-export const HOME_ROUTE: string = '/';
+export const HOME_ROUTE: string = '/home';
 export const PRICING_ROUTE: string = '/pricing';
 export const CONTACT_ROUTE: string = '/contact';
 export const LOGIN_ROUTE: string = '/login';

@@ -1,0 +1,8 @@
+.headerHome {
+  @apply min-h-[1100px];
+  background: url(/images/home/BG.png) no-repeat top center;
+}
+
+.headerHomeItem {
+  @apply text-white font-Comfortaa font-bold text-xl py-16 flex items-center;
+}

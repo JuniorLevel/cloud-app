@@ -1,3 +1,4 @@
+import ButtonLink from 'components/ui/button-link/ButtonLink';
 import { colors } from 'constants/colors.ts';
 import { FC } from 'react';
 import { FaCheck } from 'react-icons/fa';
@@ -8,12 +9,16 @@ const PricesCards: FC = () => {
     <div className={styles.cards}>
       <div className={styles.cardLeft}>
         <div>
-          <p>{cardLeftInfo.days}</p>
-          <p>{cardLeftInfo.price}</p>
-          <hr />
+          <p className="text-text text-5xl font-bold mb-10">
+            {cardLeftInfo.days} days
+          </p>
+          <p className="text-[64px] text-primary mb-[100px]">
+            ${cardLeftInfo.price}
+          </p>
+          <hr className="text-[#8080806e] mb-20" />
           <ul>
             {cardLeftInfo.description.map(item => (
-              <div key={item} className="flex justify-between items-center">
+              <div key={item} className="flex justify-between">
                 <li>{item}</li>
                 <FaCheck size={25} color={colors.green} />
               </div>
@@ -23,28 +28,37 @@ const PricesCards: FC = () => {
       </div>
       <div className={styles.cardMain}>
         <div>
-          <span className="text-green">Most popular</span>
-          <p>{cardMainInfo.days}</p>
-          <p>{cardMainInfo.price}</p>
-          <hr />
+          <span className="inline-block text-green mb-3">Most popular</span>
+          <p className="text-text text-5xl font-bold mb-10">
+            {cardMainInfo.days} days
+          </p>
+          <p className="text-[64px] text-primary mb-[100px]">
+            ${cardMainInfo.price}
+          </p>
+          <hr className="text-[#8080806e] mb-20" />
           <ul>
             {cardMainInfo.description.map(item => (
-              <div key={item} className="flex justify-between items-center">
+              <div key={item} className="flex justify-between">
                 <li>{item}</li>
                 <FaCheck size={25} color={colors.green} />
               </div>
             ))}
           </ul>
+          <ButtonLink text="Sign in" />
         </div>
       </div>
       <div className={styles.cardRight}>
         <div>
-          <p>{cardRightInfo.days}</p>
-          <p>{cardRightInfo.price}</p>
-          <hr />
+          <p className="text-text text-5xl font-bold mb-10">
+            {cardRightInfo.days} days
+          </p>
+          <p className="text-[64px] text-primary mb-[100px]">
+            ${cardRightInfo.price}
+          </p>
+          <hr className="text-[#8080806e] mb-20" />
           <ul>
             {cardRightInfo.description.map(item => (
-              <div key={item} className="flex justify-between items-center">
+              <div key={item} className="flex justify-between">
                 <li>{item}</li>
                 <FaCheck size={25} color={colors.green} />
               </div>
@@ -55,5 +69,4 @@ const PricesCards: FC = () => {
     </div>
   );
 };
-
 export default PricesCards;

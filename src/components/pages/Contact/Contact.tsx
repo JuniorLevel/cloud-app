@@ -4,7 +4,7 @@ import { FC } from 'react';
 const Contact: FC = () => {
   return (
     <Layout>
-      <div>Contact</div>
+      <section>Contact</section>
     </Layout>
   );
 };

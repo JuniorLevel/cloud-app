@@ -1,10 +1,10 @@
 import Container from 'components/container/Container';
 import { FC } from 'react';
+import styles from './HomePrices.module.scss';
 import PricesCards from './prices-cards/PricesCards';
-
 const HomePrices: FC = () => {
   return (
-    <section>
+    <section className={styles.prices}>
       <Container width={1600}>
         <h2 className="text-title text-center text-7xl font-light font-['Roboto'] uppercase tracking-[20.52px] mb-5">
           Become a PREMIUM MEMBER

@@ -1,8 +1,8 @@
-import ButtonTry from 'components/ui/button-try/ButtonTry';
+import ButtonLink from 'components/ui/button-link/ButtonLink';
 import ContentText from 'components/ui/content-text/ContentText';
 import { FC } from 'react';
 
-const PreviewInfo: FC = () => {
+const HeaderHomePreviewInfo: FC = () => {
   return (
     <div className="mt-12 text-title max-w-[515px]">
       <h1 className="text-title text-7xl font-black font-['Roboto'] uppercase leading-[70px] mb-4">
@@ -18,9 +18,9 @@ const PreviewInfo: FC = () => {
         you're using FireFox or Chrome, you can simply drag & drop your files to
         begin uploading
       </p>
-      <ButtonTry />
+      <ButtonLink text="Try SkyBox Now" />
     </div>
   );
 };
 
-export default PreviewInfo;
+export default HeaderHomePreviewInfo;

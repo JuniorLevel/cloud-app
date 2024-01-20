@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-const PreviewImage: FC = () => {
+const HeaderHomePreviewImage: FC = () => {
   return (
     <div className="max-w-[817px] w-full">
       <img src="/images/home/Design.png" alt="design-png" />
@@ -8,4 +8,4 @@ const PreviewImage: FC = () => {
   );
 };
 
-export default PreviewImage;
+export default HeaderHomePreviewImage;

@@ -1,0 +1,19 @@
+.footer {
+  @apply text-white font-['Comfortaa'] mt-[250px];
+  background: url('/images/home/BG-footer.png') no-repeat top left;
+}
+
+.links {
+  li {
+    @apply mb-5 last:mb-0 duration-500 transition underline hover:text-title hover:no-underline;
+  }
+}
+
+.contacts {
+  li {
+    @apply mb-5 last:mb-0;
+    a {
+      @apply duration-500 transition hover:text-title;
+    }
+  }
+}

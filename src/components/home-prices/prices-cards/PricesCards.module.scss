@@ -1,28 +1,37 @@
 .cards {
   @apply flex gap-6 font-['Comfortaa'] text-center items-end;
   li {
-    @apply mb-2 last:mb-0 text-2xl font-normal leading-normal;
+    @apply mb-8 last:mb-0 text-2xl font-normal leading-normal;
+  }
+  ul {
+    @apply text-start;
+  }
+  p {
+    @apply leading-none;
   }
 }
 
 .cardLeft {
-  @apply relative w-[450px] h-[964px] bg-[#FFFFFF] rounded-[20px] py-20 px-40;
+  @apply relative max-w-[450px] w-full h-[900px] bg-[#FFFFFF] rounded-[20px] py-[120px] px-[70px] z-10;
   &:before {
-    @apply content-[''] absolute w-full h-full top-0 right-0 rounded-[20px];
+    @apply content-[''] absolute w-full h-full top-0 right-0 rounded-[20px] z-[-1];
     background: url('/images/home/BG-card-left.png') no-repeat;
   }
 }
 .cardMain {
-  @apply relative w-[650px] h-[1033px] bg-[#FFFFFF] rounded-[20px] py-20 px-40 shadow-cardShadow;
+  @apply relative max-w-[650px] w-full h-[1000px] bg-[#FFFFFF] rounded-[20px] py-20 px-40 shadow-cardShadow z-10;
   &:before {
-    @apply content-[''] absolute w-full h-full top-0 right-0 rounded-[20px];
+    @apply content-[''] absolute w-full h-full top-0 right-0 rounded-[20px] z-[-1];
     background: url('/images/home/BG-card-main.png') no-repeat;
+  }
+  ul {
+    @apply mb-[100px];
   }
 }
 .cardRight {
-  @apply relative w-[450px] h-[964px] bg-[#FFFFFF] rounded-[20px] py-20 px-40;
+  @apply relative max-w-[450px] w-full h-[900px] bg-[#FFFFFF] rounded-[20px] py-[120px] px-[70px] z-10;
   &:before {
-    @apply content-[''] absolute w-full h-full top-0 right-0 rounded-[20px];
+    @apply content-[''] absolute w-full h-full top-0 right-0 rounded-[20px] z-[-1];
     background: url('/images/home/BG-card-right.png') no-repeat;
   }
 }

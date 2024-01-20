@@ -1,14 +1,14 @@
-import { FC, ReactElement } from 'react';
+import { FC, ReactNode } from 'react';
 
 interface IContainer {
-  children: ReactElement | ReactElement[];
+  children: ReactNode | undefined;
   width: number;
 }
 
 const Container: FC<IContainer> = ({ children, width }) => {
   return (
     <div
-      className="mx-auto w-full"
+      className="mx-auto w-full px-2"
       style={{
         maxWidth: `${width}px`,
       }}

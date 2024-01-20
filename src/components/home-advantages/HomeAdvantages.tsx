@@ -5,7 +5,7 @@ import AdvantagesInfo from './advantages-info/AdvantagesInfo';
 
 const HomeAdvantages: FC = () => {
   return (
-    <section>
+    <section className="mt-0">
       <Container width={1650}>
         <div className="flex items-center">
           <AdvantagesImage />

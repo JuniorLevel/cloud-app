@@ -2,11 +2,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
 body {
-  @apply font-Montserrat font-[400] text-sm text-text h-[100vh];
-  background: url(/images/home/BG.png) no-repeat top center;
-  background-size: cover;
+  @apply font-Montserrat font-[400] text-sm text-text h-[100vh] leading-none overflow-x-hidden;
 }
 
 section {
