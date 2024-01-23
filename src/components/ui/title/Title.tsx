@@ -6,7 +6,7 @@ interface ITitle {
 
 const Title: FC<ITitle> = ({ text }) => {
   return (
-    <h1 className="text-title text-7xl font-black font-['Roboto'] uppercase leading-[70px] tracking-[29.16px] mb-4">
+    <h1 className="text-title text-center text-7xl font-black font-['Roboto'] uppercase leading-[70px] tracking-[29.16px] mb-4">
       {text}
     </h1>
   );

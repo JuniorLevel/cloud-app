@@ -1,5 +1,4 @@
 import ButtonLink from 'components/ui/button-link/ButtonLink';
-import ContentText from 'components/ui/content-text/ContentText';
 import { FC } from 'react';
 
 const HeaderHomePreviewInfo: FC = () => {
@@ -8,7 +7,9 @@ const HeaderHomePreviewInfo: FC = () => {
       <h1 className="text-title text-7xl font-black font-['Roboto'] uppercase leading-[70px] mb-4">
         Personal and Business
       </h1>
-      <ContentText />
+      <p className="text-2xl font-['Montserrat'] uppercase leading-9 tracking-[20px] mb-8">
+        Online storage
+      </p>
       <hr className="w-full mb-11" />
       <h2 className="text-[26px] font-medium font-['Roboto'] uppercase leading-10 mb-3">
         STORE AND MANAGE ALL YOUR Files!

@@ -8,10 +8,7 @@ const HomeStatistics: FC = () => {
         <div className="flex justify-between items-center font-['Comfortaa'] font-bold">
           <div className="flex gap-5 items-center">
             <div>
-              <img
-                src="/public/images/home/icons/Icon-upload.svg"
-                alt="icon-upload"
-              />
+              <img src="/images/home/icons/Icon-upload.svg" alt="icon-upload" />
             </div>
             <div>
               <p className="text-[42px] text-title mb-5">999529 000 000</p>
@@ -24,7 +21,7 @@ const HomeStatistics: FC = () => {
             <div className="flex gap-5 items-center">
               <div>
                 <img
-                  src="/public/images/home/icons/Icon-add-user.svg"
+                  src="/images/home/icons/Icon-add-user.svg"
                   alt="icon-add-user"
                 />
               </div>

@@ -2,12 +2,12 @@ import { REGISTER_ROUTE } from 'constants/consts-routes';
 import { FC } from 'react';
 import { Link } from 'react-router-dom';
 
-interface IButton {
+interface IButtonLink {
   text: string;
   width?: number;
 }
 
-const Button: FC<IButton> = ({ text, width = 300 }) => {
+const ButtonLink: FC<IButtonLink> = ({ text, width = 300 }) => {
   return (
     <Link to={REGISTER_ROUTE}>
       <button
@@ -20,4 +20,4 @@ const Button: FC<IButton> = ({ text, width = 300 }) => {
   );
 };
 
-export default Button;
+export default ButtonLink;

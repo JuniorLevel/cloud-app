@@ -34,6 +34,8 @@ export default {
     },
     borderRadius: {
       round: '45px',
+      roundArea: '50px',
+      roundForm: '60px',
     },
     boxShadow: {
       cardShadow: '4px 22px 22px rgba(0, 0, 0, 0.2)',

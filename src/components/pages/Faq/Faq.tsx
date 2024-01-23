@@ -1,15 +1,15 @@
+import FaqAccordion from 'components/faq-accordion/FaqAccordion';
 import HomeStatistics from 'components/home-statistics/HomeStatistics';
 import Layout from 'components/layout/Layout';
-import PricingPrices from 'components/pricing-prices/PricingPrices';
 import { FC } from 'react';
 
-const Pricing: FC = () => {
+const Faq: FC = () => {
   return (
     <Layout>
-      <PricingPrices />
+      <FaqAccordion />
       <HomeStatistics />
     </Layout>
   );
 };
 
-export default Pricing;
+export default Faq;

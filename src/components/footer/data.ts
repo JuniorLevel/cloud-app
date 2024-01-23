@@ -1,4 +1,8 @@
-import { CONTACT_ROUTE, PRICING_ROUTE } from 'constants/consts-routes';
+import {
+  CONTACT_ROUTE,
+  FAQ_ROUTE,
+  PRICING_ROUTE,
+} from 'constants/consts-routes';
 
 interface ILinks {
   id: number;
@@ -19,8 +23,8 @@ export const links: ILinks[] = [
   },
   {
     id: 3,
-    name: 'DMCA',
-    link: '*',
+    name: 'FAQ',
+    link: FAQ_ROUTE,
   },
   {
     id: 4,
