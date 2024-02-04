@@ -1,0 +1,42 @@
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import LogoutIcon from '@mui/icons-material/Logout';
+import { PROFILE_ROUTE } from 'constants/consts-routes';
+import { FC, useState } from 'react';
+import { Link } from 'react-router-dom';
+import useUserStore from 'store/user.store';
+import styles from './AuthPanel.module.scss';
+
+const AuthPanel: FC = () => {
+  const [isOpenMenu, setIsOpenMenu] = useState(false);
+  const currentUser = useUserStore(state => state.currentUser);
+  const logout = useUserStore(state => state.logout);
+  return (
+    <div className={styles.authPanel}>
+      <div
+        className={styles.authPanel__top}
+        onClick={() => setIsOpenMenu(!isOpenMenu)}
+      >
+        <AccountCircleIcon fontSize="large" />
+        <span>{currentUser!.username}</span>
+      </div>
+      {isOpenMenu && (
+        <div className={styles.authPanel__menu}>
+          <ul>
+            <li>
+              <Link to={PROFILE_ROUTE}>
+                <span>Profile</span>
+              </Link>
+              <AccountCircleIcon fontSize="medium" />
+            </li>
+            <li onClick={() => logout()}>
+              <span>Logout</span>
+              <LogoutIcon fontSize="medium" />
+            </li>
+          </ul>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default AuthPanel;

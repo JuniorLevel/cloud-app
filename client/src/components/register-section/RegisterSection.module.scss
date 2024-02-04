@@ -1,0 +1,14 @@
+.register {
+  @apply relative min-h-[950px] mt-0 mb-[350px];
+  &:before {
+    position: absolute;
+    content: '';
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('/images/contact/contact-form-bg.png') no-repeat top center /
+      100% 100%;
+    z-index: -1;
+  }
+}

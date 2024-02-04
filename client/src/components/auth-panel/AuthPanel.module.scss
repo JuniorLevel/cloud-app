@@ -1,0 +1,23 @@
+.authPanel {
+  @apply relative cursor-pointer;
+  &__top {
+    @apply flex items-center gap-4 min-w-[120px];
+    &:hover {
+      svg {
+        @apply text-[#210e0d] duration-500 transition;
+      }
+      span {
+        @apply text-secondary duration-500 transition;
+      }
+    }
+  }
+  &__menu {
+    @apply absolute top-[48px] bg-[rgba(73,71,97,0.49)] right-0 w-full;
+    ul {
+      @apply flex flex-col items-center;
+      li {
+        @apply flex gap-2 p-2 duration-500 transition hover:text-[rgba(255,255,255,.5)];
+      }
+    }
+  }
+}

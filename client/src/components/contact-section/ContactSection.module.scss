@@ -1,0 +1,17 @@
+.contactSection {
+  @apply relative font-['Comfortaa'] mt-0 min-h-[950px] pb-[350px];
+  &:before {
+    position: absolute;
+    content: '';
+    top: 1100px;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('/images/contact/contact-form-bg.png') no-repeat top center /
+      100% 50%;
+    z-index: -1;
+  }
+  h2 {
+    @apply text-center text-title text-[42px] font-bold mb-7;
+  }
+}

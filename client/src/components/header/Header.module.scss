@@ -1,0 +1,8 @@
+.header {
+  @apply min-h-[350px];
+  background: url(/images/home/header-bg.png) no-repeat top center / 100% 100%;
+}
+
+.headerItem {
+  @apply text-white font-Comfortaa font-bold text-xl py-16 flex items-center;
+}
