@@ -1,7 +1,9 @@
 import ButtonLink from 'components/ui/button-link/ButtonLink';
 import { FC } from 'react';
+import useUserStore from 'store/user.store';
 
 const HeaderHomePreviewInfo: FC = () => {
+  const isAuth = useUserStore(state => state.isAuth);
   return (
     <div className="mt-12 text-title max-w-[515px]">
       <h1 className="text-title text-7xl font-black font-['Roboto'] uppercase leading-[70px] mb-4">
@@ -19,7 +21,7 @@ const HeaderHomePreviewInfo: FC = () => {
         you're using FireFox or Chrome, you can simply drag & drop your files to
         begin uploading
       </p>
-      <ButtonLink text="Try SkyBox Now" />
+      <ButtonLink text={isAuth ? 'Profile' : 'Try SkyBox Now'} />
     </div>
   );
 };

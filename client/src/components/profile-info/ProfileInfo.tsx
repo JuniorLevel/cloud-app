@@ -8,7 +8,7 @@ const ProfileInfo: FC = () => {
       <div className="mx-auto min-w-[350px] min-h-[350px] max-w-[350px] max-h-[350px] w-full h-full mb-8">
         <img
           className="rounded-[50%]"
-          src="../../../public/images/profiles/profile-img.jpg"
+          src="../../../images/profiles/profile-img.jpg"
           alt="profile-img"
         />
       </div>

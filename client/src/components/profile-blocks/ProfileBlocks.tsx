@@ -10,19 +10,19 @@ const ProfileBlocks: FC = () => {
         id={1}
         text="Disk space"
         info={`${user?.diskSpace} gb`}
-        url="../../../public/images/profiles/crown1.svg"
+        url="../../../images/profiles/crown1.svg"
       />
       <ProfileBlock
         id={2}
         text="Used space"
         info={`${user?.usedSpace} gb`}
-        url="../../../public/images/profiles/calendar.svg"
+        url="../../../images/profiles/calendar.svg"
       />
       <ProfileBlock
         id={3}
         text="File stored total"
         info={`${user?.filedStoredTotal} gb`}
-        url="../../../public/images/profiles/storage.svg"
+        url="../../../images/profiles/storage.svg"
       />
     </ul>
   );

@@ -1,11 +1,14 @@
-import axios, { AxiosResponse } from 'axios';
+import axios, { AxiosError, AxiosResponse } from 'axios';
 import { ICurrentUser } from 'interfaces/interfaces';
+import { toast } from 'react-toastify';
 import { create } from 'zustand';
 import { devtools } from 'zustand/middleware';
 
 interface IUserStore {
-  currentUser: ICurrentUser | null;
+  currentUser: ICurrentUser | undefined;
   isAuth: boolean;
+  isReg: boolean;
+  isLoading: boolean;
   logout: () => void;
   auth: () => Promise<void>;
   login: (email: string, password: string) => Promise<void>;
@@ -31,11 +34,13 @@ interface IAuth extends ILogin {}
 
 const useUserStore = create<IUserStore>()(
   devtools(set => ({
-    currentUser: null,
+    currentUser: undefined,
     isAuth: false,
+    isReg: false,
+    isLoading: true,
     logout: () => {
       set({ isAuth: false });
-      set({ currentUser: null });
+      set({ currentUser: undefined });
       localStorage.removeItem('token');
     },
     async login(email, password) {
@@ -49,10 +54,21 @@ const useUserStore = create<IUserStore>()(
         );
         localStorage.setItem('token', res.data.token);
         set({ isAuth: true });
+        set({ isReg: false });
         set({ currentUser: res.data.user });
+        toast.success('Вы успешно авторизованы!', {
+          position: 'bottom-right',
+        });
         console.log(res.data.user, 'user');
-      } catch (err: any) {
-        console.log(err.response.data.message);
+      } catch (err) {
+        if (axios.isAxiosError(err)) {
+          const axiosError: AxiosError = err.response?.data;
+          toast.error(axiosError.message, {
+            position: 'bottom-right',
+          });
+        } else {
+          throw new Error('Ошибка входа в аккаунт. Повторите попытку...');
+        }
       }
     },
     async registration(
@@ -73,11 +89,23 @@ const useUserStore = create<IUserStore>()(
             password,
           },
         );
-        set({ isAuth: true });
-        set({ currentUser: res.data.user });
-        alert(res.data.message);
-      } catch (err: any) {
-        alert(err.message);
+        set({ isReg: true });
+        toast.success(res.data.message, {
+          position: 'bottom-right',
+        });
+        toast.info(`Войдите в аккаунт!`, {
+          position: 'bottom-right',
+        });
+      } catch (err) {
+        set({ isLoading: false });
+        if (axios.isAxiosError(err)) {
+          const axiosError: AxiosError = err.response?.data;
+          toast.error(axiosError.message, {
+            position: 'bottom-right',
+          });
+        } else {
+          throw new Error('Ошибка регистрации. Повторите попытку...');
+        }
       }
     },
     async auth() {
@@ -92,10 +120,18 @@ const useUserStore = create<IUserStore>()(
         );
         set({ isAuth: true });
         set({ currentUser: res.data.user });
+        set({ isLoading: false });
         localStorage.setItem('token', res.data.token);
-      } catch (err: any) {
-        localStorage.removeItem('token');
-        console.log(err.message);
+      } catch (err) {
+        set({ isLoading: false });
+        if (axios.isAxiosError(err)) {
+          const axiosError: AxiosError = err.response?.data;
+          toast.error(axiosError.message, {
+            position: 'bottom-right',
+          });
+        } else {
+          throw new Error('Ошибка авторизации. Повторите попытку...');
+        }
       }
     },
   })),

@@ -11,7 +11,9 @@ router.post('/reg', async (req, res) => {
     const { username, age, gender, email, password } = req.body;
     const candidate = await User.findOne({ email });
     if (candidate) {
-      return res.status(400).json({ message: 'User already exists' });
+      return res
+        .status(400)
+        .json({ message: 'Такой пользователь уже существует!' });
     }
     const hashPassword = await bcrypt.hash(password, 8);
     const user = new User({
@@ -38,7 +40,7 @@ router.post('/reg', async (req, res) => {
     });
   } catch (e) {
     console.log(e);
-    res.send({ message: 'Server error' });
+    res.send({ message: 'Ошибка на стороне сервера!' });
   }
 });
 
@@ -47,11 +49,11 @@ router.post('/login', async (req, res) => {
     const { email, password } = req.body;
     const user = await User.findOne({ email });
     if (!user) {
-      return res.status(404).json({ message: 'User not found' });
+      return res.status(404).json({ message: 'Пользователь не найден!' });
     }
     const isPassValid = bcrypt.compareSync(password, user.password);
     if (!isPassValid) {
-      return res.status(400).json({ message: 'Invalid password' });
+      return res.status(400).json({ message: 'Неверный пароль!' });
     }
     const token = jwt.sign({ id: user.id }, process.env.SECRET_KEY, {
       expiresIn: '1h',
@@ -71,7 +73,7 @@ router.post('/login', async (req, res) => {
       },
     });
   } catch (e) {
-    res.send({ message: 'Server error' });
+    res.send({ message: 'Ошибка на стороне сервера!' });
   }
 });
 
@@ -96,7 +98,7 @@ router.get('/auth', authMiddleware, async (req, res) => {
       },
     });
   } catch (e) {
-    res.send({ message: 'Server error' });
+    res.send({ message: 'Ошибка на стороне сервера!' });
   }
 });
 

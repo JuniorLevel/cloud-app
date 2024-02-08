@@ -1,13 +1,15 @@
 .filesSection {
-  @apply relative min-h-[950px] mt-0 mb-[350px];
+  @apply relative mt-0 pb-[350px];
   &:before {
     position: absolute;
     content: '';
     top: 0;
     left: 0;
     width: 100%;
+    min-height: 1100px;
     height: 100%;
-    background: url('/images/contact/contact-form-bg.png') no-repeat top left;
+    background: url('/images/contact/contact-form-bg.png') no-repeat top center /
+      100% 50%;
     z-index: -1;
   }
 }

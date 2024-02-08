@@ -2,9 +2,12 @@ import ButtonLink from 'components/ui/button-link/ButtonLink';
 import { colors } from 'constants/colors.ts';
 import { FC } from 'react';
 import { FaCheck } from 'react-icons/fa';
+import useUserStore from 'store/user.store';
 import styles from './PricesCards.module.scss';
 import { cardLeftInfo, cardMainInfo, cardRightInfo } from './data';
 const PricesCards: FC = () => {
+  const isAuth = useUserStore(state => state.isAuth);
+
   return (
     <div className={styles.cards}>
       <div className={styles.cardLeft}>
@@ -44,7 +47,7 @@ const PricesCards: FC = () => {
               </div>
             ))}
           </ul>
-          <ButtonLink text="Sign in" />
+          <ButtonLink text={isAuth ? 'Profile' : 'Sign in'} />
         </div>
       </div>
       <div className={styles.cardRight}>

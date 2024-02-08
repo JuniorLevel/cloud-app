@@ -1,11 +1,12 @@
 .profileSection {
-  @apply relative min-h-[950px] mt-0 mb-[350px];
+  @apply relative mt-0 mb-[350px];
   &:before {
     position: absolute;
     content: '';
     top: 0;
     left: 0;
     width: 100%;
+    min-height: 950px;
     height: 100%;
     background: url('/images/contact/contact-form-bg.png') no-repeat top center /
       100% 100%;
