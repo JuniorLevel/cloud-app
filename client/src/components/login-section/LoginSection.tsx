@@ -3,7 +3,7 @@ import ButtonSubmit from 'components/ui/button-submit/ButtonSubmit';
 import ContentText from 'components/ui/content-text/ContentText';
 import Input from 'components/ui/input/Input';
 import Title from 'components/ui/title/Title';
-import { LOGIN_ROUTE } from 'constants/consts-routes';
+import { REGISTER_ROUTE } from 'constants/consts-routes';
 import { ILoginFormData } from 'interfaces/interfaces';
 import { FC } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
@@ -72,8 +72,8 @@ const LoginSection: FC = () => {
             }}
           />
           <div className="flex justify-between items-center">
-            <Link to={LOGIN_ROUTE}>
-              <p className="hover:text-primary">Do you have account?</p>
+            <Link to={REGISTER_ROUTE}>
+              <p className="hover:text-primary">Do not have account?</p>
             </Link>
             <ButtonSubmit text="Login" disabled={!isValid} />
           </div>

@@ -1,0 +1,26 @@
+.popup {
+  @apply fixed top-0 left-0 right-0 bottom-0 w-full h-full bg-[rgba(0,0,0,0.4)] z-[999] flex justify-center items-center font-bold;
+  &__body {
+    @apply bg-whiteInput max-w-[400px] w-full py-8 px-6;
+  }
+  &__bodyHeader {
+    @apply flex justify-between items-center mb-5;
+    p {
+      @apply text-[24px] text-title uppercase;
+    }
+    svg {
+      @apply text-whiteInput hover:cursor-pointer hover:text-[orange];
+    }
+  }
+  &__bodyMain {
+    p {
+      @apply text-[16px] mb-2 text-grey;
+    }
+    input {
+      @apply bg-[#DAE1EC] max-w-[260px] w-full h-[40px] p-2;
+    }
+  }
+  button {
+    @apply bg-[#F04438] hover:bg-[#d96860] text-white font-bold uppercase rounded-[5px] max-w-[145px] w-full px-2 py-4;
+  }
+}

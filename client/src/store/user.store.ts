@@ -43,34 +43,6 @@ const useUserStore = create<IUserStore>()(
       set({ currentUser: undefined });
       localStorage.removeItem('token');
     },
-    async login(email, password) {
-      try {
-        const res: AxiosResponse<ILogin> = await axios.post(
-          'http://localhost:5000/auth/login',
-          {
-            email,
-            password,
-          },
-        );
-        localStorage.setItem('token', res.data.token);
-        set({ isAuth: true });
-        set({ isReg: false });
-        set({ currentUser: res.data.user });
-        toast.success('Вы успешно авторизованы!', {
-          position: 'bottom-right',
-        });
-        console.log(res.data.user, 'user');
-      } catch (err) {
-        if (axios.isAxiosError(err)) {
-          const axiosError: AxiosError = err.response?.data;
-          toast.error(axiosError.message, {
-            position: 'bottom-right',
-          });
-        } else {
-          throw new Error('Ошибка входа в аккаунт. Повторите попытку...');
-        }
-      }
-    },
     async registration(
       username: string,
       age: string | number,
@@ -105,6 +77,34 @@ const useUserStore = create<IUserStore>()(
           });
         } else {
           throw new Error('Ошибка регистрации. Повторите попытку...');
+        }
+      }
+    },
+    async login(email, password) {
+      try {
+        const res: AxiosResponse<ILogin> = await axios.post(
+          'http://localhost:5000/auth/login',
+          {
+            email,
+            password,
+          },
+        );
+        localStorage.setItem('token', res.data.token);
+        set({ isAuth: true });
+        set({ isReg: false });
+        set({ currentUser: res.data.user });
+        toast.success('Вы успешно авторизованы!', {
+          position: 'bottom-right',
+        });
+        console.log(res.data.user, 'user');
+      } catch (err) {
+        if (axios.isAxiosError(err)) {
+          const axiosError: AxiosError = err.response?.data;
+          toast.error(axiosError.message, {
+            position: 'bottom-right',
+          });
+        } else {
+          throw new Error('Ошибка входа в аккаунт. Повторите попытку...');
         }
       }
     },

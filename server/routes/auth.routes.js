@@ -3,6 +3,8 @@ const User = require('../models/User');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const authMiddleware = require('../middleware/authMiddleware');
+const FileService = require('../services/file.service');
+const File = require('../models/File');
 
 const router = new Router();
 
@@ -24,6 +26,9 @@ router.post('/reg', async (req, res) => {
       password: hashPassword,
     });
     await user.save();
+    await FileService.createFolder(
+      new File({ currentUser: user.id, fileName: '' }),
+    );
     return res.json({
       message: 'Пользователь успешно создан!',
       user: {

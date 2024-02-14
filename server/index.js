@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const authRouter = require('./routes/auth.routes');
+const FileRouter = require('./routes/file.routes');
 const contactRouter = require('./routes/contact.routes');
 const cors = require('cors');
 dotenv.config();
@@ -12,6 +13,7 @@ app.use(cors());
 app.use(express.json());
 app.use('/auth', authRouter);
 app.use('/contact', contactRouter);
+app.use('/files', FileRouter);
 
 const start = async () => {
   try {
@@ -23,5 +25,4 @@ const start = async () => {
     throw new Error(err);
   }
 };
-
 start();
