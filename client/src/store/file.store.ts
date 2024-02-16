@@ -26,10 +26,14 @@ interface IFileStore {
     parentOfFile: null | string,
     fileName: string,
   ) => Promise<void>;
+  setCurrentDirectory: (currentDirectoryId: string | null) => void;
+  stackOfDirectories: string[];
+  pushToStack: (currentDirectoryId: string) => void;
 }
 
 const useFileStore = create<IFileStore>()(
   devtools(set => ({
+    stackOfDirectories: [],
     currentDirectory: null,
     isShowPopup: false,
     files: [],
@@ -40,7 +44,7 @@ const useFileStore = create<IFileStore>()(
       try {
         const res: AxiosResponse<any> = await axios.get(
           `http://localhost:5000/files${
-            parentOfFile ? '?parent=' + parentOfFile : ''
+            parentOfFile ? '?parentOfFile=' + parentOfFile : ''
           }`,
           {
             headers: {
@@ -60,7 +64,7 @@ const useFileStore = create<IFileStore>()(
         }
       }
     },
-    async createDirectory(parentOfFile: string | null, fileName: string) {
+    async createDirectory(parentOfFile: null | string, fileName: string) {
       try {
         const res: AxiosResponse<any> = await axios.post(
           'http://localhost:5000/files',
@@ -92,6 +96,14 @@ const useFileStore = create<IFileStore>()(
           throw new Error('Ошибка при создании папки');
         }
       }
+    },
+    setCurrentDirectory(currentDirectoryId: string | null) {
+      set({ currentDirectory: currentDirectoryId });
+    },
+    pushToStack(currentDirectoryId: string) {
+      set(state => ({
+        stackOfDirectories: [...state.stackOfDirectories, currentDirectoryId],
+      }));
     },
   })),
 );

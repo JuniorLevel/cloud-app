@@ -16,9 +16,11 @@ class FileController {
       });
       if (!parentFile) {
         file.pathToFile = fileName;
+        console.log(file.pathToFile, '!parentFile');
+        console.log(file);
         await FileService.createFolder(file);
       } else {
-        file.pathToFile = `${parentFile.fileName}/${file.fileName}`;
+        file.pathToFile = `${parentFile.pathToFile}/${file.fileName}`;
         await FileService.createFolder(file);
         parentFile.childsOfFile.push(file.id);
         await parentFile.save();
