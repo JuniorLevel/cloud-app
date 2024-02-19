@@ -13,7 +13,7 @@ class FileService {
           fs.mkdirSync(filePath);
           return resolve('Папка успешно создана');
         } else {
-          return reject(new Error('Файл с таким именем уже существует'));
+          return reject(new Error('Папка с таким именем уже существует'));
         }
       } catch (err) {
         console.log(err);

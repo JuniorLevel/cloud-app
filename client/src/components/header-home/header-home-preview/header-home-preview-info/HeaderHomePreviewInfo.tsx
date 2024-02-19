@@ -21,7 +21,7 @@ const HeaderHomePreviewInfo: FC = () => {
         you're using FireFox or Chrome, you can simply drag & drop your files to
         begin uploading
       </p>
-      <ButtonLink text={isAuth ? 'Profile' : 'Try SkyBox Now'} />
+      <ButtonLink text={isAuth ? 'My files' : 'Try SkyBox Now'} />
     </div>
   );
 };

@@ -1,4 +1,5 @@
 import FolderOpenIcon from '@mui/icons-material/FolderOpen';
+import ImageIcon from '@mui/icons-material/Image';
 import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile';
 import ReplyIcon from '@mui/icons-material/Reply';
 import Box from '@mui/material/Box';
@@ -6,7 +7,7 @@ import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import ButtonAddFolder from 'components/ui/button-add-folder/ButtonAddFolder';
 import ButtonUpload from 'components/ui/button-upload/ButtonUpload';
 import { colors } from 'constants/colors';
-import { FC } from 'react';
+import { FC, useEffect, useState } from 'react';
 import useFileStore from 'store/file.store';
 const FilesTable: FC = () => {
   const files = useFileStore(state => state.files);
@@ -14,6 +15,16 @@ const FilesTable: FC = () => {
   const currentDirectory = useFileStore(state => state.currentDirectory);
   const pushToStack = useFileStore(state => state.pushToStack);
   const stackOfDirectories = useFileStore(state => state.stackOfDirectories);
+
+  const [paginationModel, setPaginationModel] = useState({
+    pageSize: 10,
+    page: 0,
+  });
+
+  useEffect(() => {
+    setPaginationModel(prev => ({ ...prev, page: 0 }));
+  }, [files]);
+
   const columns: GridColDef[] = [
     {
       field: 'typeOfFile',
@@ -22,11 +33,22 @@ const FilesTable: FC = () => {
       disableColumnMenu: true,
       sortable: false,
       renderCell: params => {
-        return params.row.typeOfFile === 'dir' ? (
-          <FolderOpenIcon color="primary" />
-        ) : (
-          <InsertDriveFileIcon color="primary" />
-        );
+        if (params.row.typeOfFile === 'dir') {
+          return <FolderOpenIcon color="primary" />;
+        }
+        if (
+          params.row.typeOfFile === 'png' ||
+          params.row.typeOfFile === 'jpeg' ||
+          params.row.typeOfFile === 'jpg' ||
+          params.row.typeOfFile === 'svg' ||
+          params.row.typeOfFile === 'webp' ||
+          params.row.typeOfFile === 'gif'
+        ) {
+          return <ImageIcon color="primary" />;
+        }
+        if (params.row.typeOfFile !== 'dir') {
+          return <InsertDriveFileIcon color="primary" />;
+        }
       },
     },
     {
@@ -83,7 +105,7 @@ const FilesTable: FC = () => {
         )}
       </div>
       <DataGrid
-        onRowClick={params => {
+        onRowDoubleClick={params => {
           if (params.row.typeOfFile === 'dir') {
             if (params.id) {
               pushToStack(String(params.id));
@@ -91,16 +113,16 @@ const FilesTable: FC = () => {
             setCurrentDirectory(String(params.id));
           }
         }}
+        localeText={{
+          noRowsLabel: 'Создайте папку или перетащите файл',
+        }}
         rows={files}
         columns={columns}
         getRowId={file => file._id}
         disableRowSelectionOnClick
         className="bg-[white]"
-        initialState={{
-          pagination: {
-            paginationModel: { page: 0, pageSize: 10 },
-          },
-        }}
+        paginationModel={paginationModel}
+        onPaginationModelChange={setPaginationModel}
         pageSizeOptions={[5, 10]}
         checkboxSelection
       />

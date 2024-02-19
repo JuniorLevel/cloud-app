@@ -29,6 +29,7 @@ interface IFileStore {
   setCurrentDirectory: (currentDirectoryId: string | null) => void;
   stackOfDirectories: string[];
   pushToStack: (currentDirectoryId: string) => void;
+  uploadFile: (fileName: object, directoryId: string | null) => Promise<void>;
 }
 
 const useFileStore = create<IFileStore>()(
@@ -66,25 +67,32 @@ const useFileStore = create<IFileStore>()(
     },
     async createDirectory(parentOfFile: null | string, fileName: string) {
       try {
-        const res: AxiosResponse<any> = await axios.post(
-          'http://localhost:5000/files',
-          {
-            fileName,
-            typeOfFile: 'dir',
-            parentOfFile,
-          },
-          {
-            headers: {
-              Authorization: `${localStorage.getItem('token')}`,
+        await toast
+          .promise(
+            axios.post(
+              'http://localhost:5000/files',
+              {
+                fileName,
+                typeOfFile: 'dir',
+                parentOfFile,
+              },
+              {
+                headers: {
+                  Authorization: `${localStorage.getItem('token')}`,
+                },
+              },
+            ),
+            {
+              pending: 'Создание папки...',
+              success: 'Папка успешно создана',
+              error: 'Ошибка при создании папки',
             },
-          },
-        );
-        set(state => ({
-          files: [res.data, ...state.files],
-        }));
-        toast.success('Папка успешно создана', {
-          position: 'bottom-right',
-        });
+          )
+          .then(res => {
+            set(state => ({
+              files: [res.data, ...state.files],
+            }));
+          });
       } catch (err) {
         if (axios.isAxiosError(err)) {
           const axiosError: AxiosError = err.response?.data;
@@ -105,7 +113,41 @@ const useFileStore = create<IFileStore>()(
         stackOfDirectories: [...state.stackOfDirectories, currentDirectoryId],
       }));
     },
+    async uploadFile(fileName: object, directoryId: string | null) {
+      try {
+        const formData = new FormData();
+        formData.append('file', Object(fileName));
+        if (directoryId) formData.append('parentOfFile', String(directoryId));
+        toast
+          .promise(
+            axios.post('http://localhost:5000/files/upload', formData, {
+              headers: {
+                Authorization: `${localStorage.getItem('token')}`,
+              },
+            }),
+            {
+              pending: 'Загрузка файла',
+              success: 'Файл загружен',
+              error: 'Ошибка при загрузке файла',
+            },
+          )
+          .then(res => {
+            set(state => ({
+              files: [res.data, ...state.files],
+            }));
+          });
+      } catch (err) {
+        if (axios.isAxiosError(err)) {
+          const axiosError: AxiosError = err.response?.data;
+          toast.error(axiosError.message, {
+            position: 'bottom-right',
+          });
+        } else {
+          console.log(err);
+          throw new Error('Ошибка при загрузке файла');
+        }
+      }
+    },
   })),
 );
-
 export default useFileStore;
