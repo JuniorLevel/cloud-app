@@ -9,6 +9,19 @@ export interface IAccordion {
   title: string;
   info: string;
 }
+
+export interface IFile {
+  fileName: string;
+  date: string;
+  typeOfFile: string;
+  sizeOfFile: number;
+  pathToFile: string;
+  currentUser: string;
+  parentOfFile: null;
+  childsOfFile: [];
+  _id: string;
+  __v: number;
+}
 export interface IUser {
   username: string;
   email: string;

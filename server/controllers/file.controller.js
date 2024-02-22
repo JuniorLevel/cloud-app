@@ -90,6 +90,25 @@ class FileController {
       return res.status(500).json({ message: 'Не удалось загрузить файл' });
     }
   }
+  async downloadFile(req, res) {
+    try {
+      const file = await File.findOne({
+        _id: req.query.id,
+        currentUser: req.user.id,
+      });
+      if (!file)
+        return res.status(400).json({ message: 'Ошибка при скачивании файла' });
+      const pathToFile = `${file.pathToFile}`;
+      if (fs.existsSync(pathToFile)) {
+        return res.download(pathToFile, file.fileName);
+      } else {
+        return res.status(400).json({ message: 'Не удалось скачать файл' });
+      }
+    } catch (err) {
+      console.log(err);
+      return res.status(400).json({ message: 'Не удалось скачать файл' });
+    }
+  }
 }
 
 module.exports = new FileController();

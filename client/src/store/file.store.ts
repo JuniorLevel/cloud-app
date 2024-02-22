@@ -1,20 +1,8 @@
 import axios, { AxiosError, AxiosResponse } from 'axios';
+import { IFile } from 'interfaces/interfaces';
 import { toast } from 'react-toastify';
 import { create } from 'zustand';
 import { devtools } from 'zustand/middleware';
-
-interface IFile {
-  fileName: string;
-  date: string;
-  typeOfFile: string;
-  sizeOfFile: number;
-  pathToFile: string;
-  currentUser: string;
-  parentOfFile: null;
-  childsOfFile: [];
-  _id: string;
-  __v: number;
-}
 
 interface IFileStore {
   isShowPopup: boolean;
@@ -30,6 +18,7 @@ interface IFileStore {
   stackOfDirectories: string[];
   pushToStack: (currentDirectoryId: string) => void;
   uploadFile: (fileName: object, directoryId: string | null) => Promise<void>;
+  downloadFile: (files: IFile[]) => Promise<void>;
 }
 
 const useFileStore = create<IFileStore>()(
@@ -118,7 +107,7 @@ const useFileStore = create<IFileStore>()(
         const formData = new FormData();
         formData.append('file', Object(fileName));
         if (directoryId) formData.append('parentOfFile', String(directoryId));
-        toast
+        await toast
           .promise(
             axios.post('http://localhost:5000/files/upload', formData, {
               headers: {
@@ -145,6 +134,40 @@ const useFileStore = create<IFileStore>()(
         } else {
           console.log(err);
           throw new Error('Ошибка при загрузке файла');
+        }
+      }
+    },
+    async downloadFile(files: IFile[]) {
+      for (const file of files) {
+        try {
+          const res = await axios.get(
+            `http://localhost:5000/files/download?id=${file._id}`,
+            {
+              responseType: 'blob',
+              headers: {
+                Authorization: `${localStorage.getItem('token')}`,
+              },
+            },
+          );
+          if (res.status === 200) {
+            const downloadUrl = window.URL.createObjectURL(res.data);
+            const link = document.createElement('a');
+            link.href = downloadUrl;
+            link.download = file.fileName;
+            link.click();
+            link.remove();
+          }
+        } catch (err) {
+          if (axios.isAxiosError(err)) {
+            console.log(err);
+            const axiosError: AxiosError = err.response?.data;
+            toast.error(axiosError.message ?? 'Ошибка при скачивании файла', {
+              position: 'bottom-right',
+            });
+          } else {
+            console.log(err);
+            throw new Error('Ошибка при загрузке файла');
+          }
         }
       }
     },
