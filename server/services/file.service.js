@@ -21,6 +21,21 @@ class FileService {
       }
     });
   }
+  deleteFile(file) {
+    const path = this.getPath(file);
+    if (file.typeOfFile === 'dir') {
+      fs.rmdirSync(path);
+    } else {
+      fs.unlinkSync(path);
+    }
+  }
+
+  getPath(file) {
+    return path.join(
+      __dirname,
+      `../files/${file.currentUser}/${file.pathToFile}`,
+    );
+  }
 }
 
 module.exports = new FileService();

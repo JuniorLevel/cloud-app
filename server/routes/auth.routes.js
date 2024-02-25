@@ -36,7 +36,7 @@ router.post('/reg', async (req, res) => {
         email: user.email,
         diskSpace: user.diskSpace,
         usedSpace: user.usedSpace,
-        filedStoredTotal: user.filedStoredTotal,
+        fileStoredTotal: user.fileStoredTotal,
         username: user.username,
         age: user.age,
         gender: user.gender,
@@ -70,7 +70,7 @@ router.post('/login', async (req, res) => {
         email: user.email,
         diskSpace: user.diskSpace,
         usedSpace: user.usedSpace,
-        filedStoredTotal: user.filedStoredTotal,
+        fileStoredTotal: user.fileStoredTotal,
         username: user.username,
         age: user.age,
         gender: user.gender,
@@ -95,7 +95,28 @@ router.get('/auth', authMiddleware, async (req, res) => {
         email: user.email,
         diskSpace: user.diskSpace,
         usedSpace: user.usedSpace,
-        filedStoredTotal: user.filedStoredTotal,
+        fileStoredTotal: user.fileStoredTotal,
+        username: user.username,
+        age: user.age,
+        gender: user.gender,
+        createdAt: user.createdAt,
+      },
+    });
+  } catch (e) {
+    res.send({ message: 'Ошибка на стороне сервера!' });
+  }
+});
+
+router.get('/user-info', authMiddleware, async (req, res) => {
+  try {
+    const user = await User.findOne({ _id: req.user.id });
+    return res.json({
+      user: {
+        id: user.id,
+        email: user.email,
+        diskSpace: user.diskSpace,
+        usedSpace: user.usedSpace,
+        fileStoredTotal: user.fileStoredTotal,
         username: user.username,
         age: user.age,
         gender: user.gender,

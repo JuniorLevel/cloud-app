@@ -3,7 +3,7 @@ const File = require('../models/File');
 const User = require('../models/User');
 const fs = require('fs');
 const path = require('path');
-
+const fileService = require('../services/file.service');
 class FileController {
   async createDirectory(req, res) {
     try {
@@ -71,14 +71,22 @@ class FileController {
       if (fs.existsSync(pathToUpload)) {
         return res.status(400).json({ message: 'Файл уже загружен' });
       }
-      file.name = decodeURIComponent(escape(file.name));
       file.mv(pathToUpload);
       const typeOfUploadFile = file.name.split('.').pop();
+      let filePath = file.name;
+      if (parentFolder) {
+        filePath = `${parentFolder.pathToFile}/${file.name}`;
+      }
+      await User.findOneAndUpdate(
+        { _id: user._id },
+        { $inc: { fileStoredTotal: 1 } },
+        { new: true },
+      );
       const uploadedFile = new File({
         fileName: file.name,
         typeOfFile: typeOfUploadFile,
         sizeOfFile: file.size,
-        pathToFile: pathToUpload,
+        pathToFile: filePath,
         parentOfFile: req.body.parentOfFile,
         currentUser: user.id,
       });
@@ -96,9 +104,10 @@ class FileController {
         _id: req.query.id,
         currentUser: req.user.id,
       });
-      if (!file)
+      if (!file) {
         return res.status(400).json({ message: 'Ошибка при скачивании файла' });
-      const pathToFile = `${file.pathToFile}`;
+      }
+      const pathToFile = fileService.getPath(file);
       if (fs.existsSync(pathToFile)) {
         return res.download(pathToFile, file.fileName);
       } else {
@@ -107,6 +116,35 @@ class FileController {
     } catch (err) {
       console.log(err);
       return res.status(400).json({ message: 'Не удалось скачать файл' });
+    }
+  }
+  async deleteFile(req, res) {
+    try {
+      const file = await File.findOne({
+        _id: req.query.id,
+        currentUser: req.user.id,
+      });
+      const user = await User.findOne({ _id: req.user.id });
+      if (!file) return res.status(400).json({ message: 'Файл не найден' });
+      fileService.deleteFile(file);
+      await file.deleteOne();
+      if (file.typeOfFile !== 'dir') {
+        await User.findOneAndUpdate(
+          { _id: user._id },
+          { $inc: { fileStoredTotal: -1 } },
+          { new: true },
+        );
+        if (user.usedSpace < 0) {
+          user.usedSpace = 0;
+        } else {
+          user.usedSpace -= file.sizeOfFile;
+        }
+      }
+      await user.save();
+      return res.json(file);
+    } catch (err) {
+      console.log(err);
+      return res.status(400).json({ message: 'Папка не пуста' });
     }
   }
 }

@@ -19,6 +19,7 @@ interface IFileStore {
   pushToStack: (currentDirectoryId: string) => void;
   uploadFile: (fileName: object, directoryId: string | null) => Promise<void>;
   downloadFile: (files: IFile[]) => Promise<void>;
+  deleteFile: (files: IFile[]) => Promise<void>;
 }
 
 const useFileStore = create<IFileStore>()(
@@ -46,11 +47,11 @@ const useFileStore = create<IFileStore>()(
       } catch (err) {
         if (axios.isAxiosError(err)) {
           const axiosError: AxiosError = err.response?.data;
-          toast.error(axiosError.message, {
+          toast.error(axiosError?.message ?? 'Ошибка получения файлов', {
             position: 'bottom-right',
           });
         } else {
-          throw new Error('Ошибка при попытке получить список файлов.');
+          throw new Error('Ошибка при попытке получить список файлов');
         }
       }
     },
@@ -85,7 +86,7 @@ const useFileStore = create<IFileStore>()(
       } catch (err) {
         if (axios.isAxiosError(err)) {
           const axiosError: AxiosError = err.response?.data;
-          toast.error(axiosError.message, {
+          toast.error(axiosError?.message ?? 'Ошибка при создании файла', {
             position: 'bottom-right',
           });
         } else {
@@ -128,7 +129,7 @@ const useFileStore = create<IFileStore>()(
       } catch (err) {
         if (axios.isAxiosError(err)) {
           const axiosError: AxiosError = err.response?.data;
-          toast.error(axiosError.message, {
+          toast.error(axiosError?.message ?? 'Ошибка при загрузке файла', {
             position: 'bottom-right',
           });
         } else {
@@ -161,12 +162,40 @@ const useFileStore = create<IFileStore>()(
           if (axios.isAxiosError(err)) {
             console.log(err);
             const axiosError: AxiosError = err.response?.data;
-            toast.error(axiosError.message ?? 'Ошибка при скачивании файла', {
+            toast.error(axiosError?.message ?? 'Ошибка при скачивании файла', {
               position: 'bottom-right',
             });
           } else {
             console.log(err);
-            throw new Error('Ошибка при загрузке файла');
+            throw new Error('Ошибка при скачивании файла');
+          }
+        }
+      }
+    },
+    async deleteFile(files: IFile[]) {
+      for (let file of files) {
+        try {
+          const res = await axios.delete(
+            `http://localhost:5000/files/?id=${file._id}`,
+            {
+              headers: {
+                Authorization: `${localStorage.getItem('token')}`,
+              },
+            },
+          );
+          set(state => ({
+            files: state.files.filter(file => file._id !== res.data._id),
+          }));
+        } catch (err) {
+          if (axios.isAxiosError(err)) {
+            console.log(err);
+            const axiosError: AxiosError = err.response?.data;
+            toast.error(axiosError?.message ?? 'Ошибка при удалении файла', {
+              position: 'bottom-right',
+            });
+          } else {
+            console.log(err);
+            throw new Error('Ошибка при удалении файла');
           }
         }
       }

@@ -13,9 +13,9 @@ import {
   GridValidRowModel,
   useGridApiRef,
 } from '@mui/x-data-grid';
-import DragFilesArea from 'components/drag-files-area/DragFilesArea';
 import ButtonAddFolder from 'components/ui/button-add-folder/ButtonAddFolder';
 import ButtonUpload from 'components/ui/button-upload/ButtonUpload';
+import SearchFiles from 'components/ui/search-files/SearchFiles';
 import { colors } from 'constants/colors';
 import { filesize } from 'filesize';
 import { IFile } from 'interfaces/interfaces';
@@ -30,13 +30,13 @@ const FilesTable: FC = () => {
   const pushToStack = useFileStore(state => state.pushToStack);
   const stackOfDirectories = useFileStore(state => state.stackOfDirectories);
   const downloadFile = useFileStore(state => state.downloadFile);
-  const [isDragFile, setIsDragFile] = useState(false);
+  const deleteFile = useFileStore(state => state.deleteFile);
   const [isSelectRow, setIsSelectRow] = useState(false);
   const [isSelectedDir, setIsSelectedDir] = useState(false);
   const [selectedRowsList, setSelectedRowsList] = useState<GridValidRowModel[]>(
     [],
   );
-  const apiRef = useGridApiRef();
+  let apiRef = useGridApiRef();
 
   const [paginationModel, setPaginationModel] = useState({
     pageSize: 10,
@@ -45,7 +45,6 @@ const FilesTable: FC = () => {
 
   useEffect(() => {
     setPaginationModel(prev => ({ ...prev, page: 0 }));
-    apiRef.current.setRowSelectionModel([]);
   }, [files]);
 
   const columns: GridColDef[] = [
@@ -54,7 +53,6 @@ const FilesTable: FC = () => {
       headerName: 'Тип',
       width: 150,
       disableColumnMenu: true,
-      sortable: false,
       renderCell: params => {
         if (params.row.typeOfFile === 'dir') {
           return <FolderOpenIcon color="primary" />;
@@ -102,13 +100,11 @@ const FilesTable: FC = () => {
   function onDragEnterHandler(e: DragEvent) {
     e.preventDefault();
     e.stopPropagation();
-    setIsDragFile(true);
   }
 
   function onDragLeaveHandler(e: DragEvent) {
     e.preventDefault();
     e.stopPropagation();
-    setIsDragFile(false);
   }
 
   function onDropHandler(e: DragEvent) {
@@ -116,7 +112,6 @@ const FilesTable: FC = () => {
     e.stopPropagation();
     const files = [...e.dataTransfer.files];
     files.forEach(file => uploadFile(file, currentDirectory));
-    setIsDragFile(false);
   }
 
   function changeDirectoryHandler() {
@@ -155,8 +150,13 @@ const FilesTable: FC = () => {
     }
   }
 
-  function downloadFilesHandler() {
+  function downloadFileClickHandler() {
     downloadFile(selectedRowsList as IFile[]);
+    apiRef.current.setRowSelectionModel([]);
+  }
+
+  function deleteFileClickHandler() {
+    deleteFile(selectedRowsList as IFile[]);
     apiRef.current.setRowSelectionModel([]);
   }
 
@@ -180,47 +180,46 @@ const FilesTable: FC = () => {
       }}
     >
       <div className="flex gap-4 justify-end mb-2 relative">
+        <SearchFiles />
         <ButtonAddFolder />
         <ButtonUpload />
         {currentDirectory && (
           <ReplyIcon
             onClick={changeDirectoryHandler}
-            className="absolute top-[65px] left-[140px] z-50 rounded-round hover:cursor-pointer hover:bg-white"
-            style={{ display: `${isDragFile ? 'none' : 'block'}` }}
+            className="absolute top-[65px] left-[140px] z-50 rounded-round hover:cursor-pointer hover:bg-white block"
             color="primary"
           />
         )}
         {isSelectRow && (
-          <DeleteIcon className="absolute top-[65px] right-[25px] z-10 hover:cursor-pointer hover:text-primary" />
+          <DeleteIcon
+            className="absolute top-[65px] right-[25px] z-10 hover:cursor-pointer hover:text-primary"
+            onClick={deleteFileClickHandler}
+          />
         )}
         {isSelectRow && !isSelectedDir && (
           <CloudDownloadIcon
             className="absolute top-[65px] right-[80px] z-10 hover:cursor-pointer hover:text-primary"
-            onClick={downloadFilesHandler}
+            onClick={downloadFileClickHandler}
           />
         )}
       </div>
-      {isDragFile ? (
-        <DragFilesArea />
-      ) : (
-        <DataGrid
-          apiRef={apiRef}
-          onRowDoubleClick={rowDoubleClickHandler}
-          localeText={{
-            noRowsLabel: 'Создайте папку или перетащите файл',
-          }}
-          rows={files}
-          columns={columns}
-          getRowId={file => file._id}
-          disableRowSelectionOnClick
-          className="bg-[white]"
-          paginationModel={paginationModel}
-          onPaginationModelChange={setPaginationModel}
-          pageSizeOptions={[5, 10]}
-          checkboxSelection
-          onRowSelectionModelChange={rowSelectionModeChangeHandler}
-        />
-      )}
+      <DataGrid
+        apiRef={apiRef}
+        onRowDoubleClick={rowDoubleClickHandler}
+        localeText={{
+          noRowsLabel: 'Создайте папку или перетащите файл',
+        }}
+        rows={files}
+        columns={columns}
+        getRowId={file => file._id}
+        disableRowSelectionOnClick
+        className="bg-[white]"
+        paginationModel={paginationModel}
+        onPaginationModelChange={setPaginationModel}
+        pageSizeOptions={[5, 10]}
+        checkboxSelection
+        onRowSelectionModelChange={rowSelectionModeChangeHandler}
+      />
     </Box>
   );
 };

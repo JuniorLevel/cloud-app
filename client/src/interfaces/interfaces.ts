@@ -34,7 +34,7 @@ export interface ICurrentUser extends TCurrentUser {
   id: string;
   diskSpace: number;
   usedSpace: number;
-  filedStoredTotal: number;
+  fileStoredTotal: number;
   createdAt: string;
 }
 export interface IContactFormData {
@@ -72,6 +72,6 @@ export type TFieldNames =
 export interface IProfileBlockData {
   id: number;
   text: string;
-  info: string;
+  info: number | string;
   url: string;
 }

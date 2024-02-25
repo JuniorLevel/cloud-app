@@ -18,10 +18,10 @@ import Files from './pages/Files/Files';
 import Home from './pages/Home/Home';
 import Login from './pages/Login/Login';
 import NotFound from './pages/NotFound/NotFound';
+import PageLoader from './pages/PageLoader/PageLoader';
 import Pricing from './pages/Pricing/Pricing';
 import Profile from './pages/Profile/Profile';
 import Register from './pages/Register/Register';
-import Spinner from './ui/spinner/Spinner';
 
 const AppRouter: FC = () => {
   const isAuth = useUserStore(state => state.isAuth);
@@ -43,13 +43,18 @@ const AppRouter: FC = () => {
   }, []);
 
   useEffect(() => {
-    if (isAuth || !isAuth) navigate(HOME_ROUTE);
+    if (!isAuth) {
+      navigate(HOME_ROUTE);
+    } else {
+      navigate(FILES_ROUTE);
+    }
   }, [isAuth]);
 
   return (
     <>
-      {isLoading && <Spinner />}
-      {!isLoading && (
+      {isLoading ? (
+        <PageLoader />
+      ) : (
         <Routes>
           <Route path={HOME_ROUTE} element={<Home />}></Route>
           <Route path={PROFILE_ROUTE} element={<Profile />}></Route>

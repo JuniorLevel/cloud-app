@@ -9,7 +9,7 @@ const User = new Schema({
   createdAt: { type: Date, default: Date.now },
   diskSpace: { type: Number, default: 1024 ** 3 * 10 },
   usedSpace: { type: Number, default: 0 },
-  filedStoredTotal: { type: Number, default: 0 },
+  fileStoredTotal: { type: Number, default: 0 },
   files: [{ type: ObjectId, ref: 'File' }],
 });
 

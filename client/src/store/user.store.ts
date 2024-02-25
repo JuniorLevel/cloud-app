@@ -11,6 +11,7 @@ interface IUserStore {
   isLoading: boolean;
   logout: () => void;
   auth: () => Promise<void>;
+  getUserInfo: () => Promise<void>;
   login: (email: string, password: string) => Promise<void>;
   registration: (
     username: string,
@@ -72,9 +73,12 @@ const useUserStore = create<IUserStore>()(
         set({ isLoading: false });
         if (axios.isAxiosError(err)) {
           const axiosError: AxiosError = err.response?.data;
-          toast.error(axiosError.message, {
-            position: 'bottom-right',
-          });
+          toast.error(
+            axiosError?.message ?? 'Ошибка регистрации. Повторите попытку...',
+            {
+              position: 'bottom-right',
+            },
+          );
         } else {
           throw new Error('Ошибка регистрации. Повторите попытку...');
         }
@@ -100,11 +104,15 @@ const useUserStore = create<IUserStore>()(
       } catch (err) {
         if (axios.isAxiosError(err)) {
           const axiosError: AxiosError = err.response?.data;
-          toast.error(axiosError.message, {
-            position: 'bottom-right',
-          });
+          toast.error(
+            axiosError?.message ??
+              'Ошибка при входе в аккаунт. Повторите попытку...',
+            {
+              position: 'bottom-right',
+            },
+          );
         } else {
-          throw new Error('Ошибка входа в аккаунт. Повторите попытку...');
+          throw new Error('Ошибка при входе в аккаунт. Повторите попытку...');
         }
       }
     },
@@ -126,12 +134,27 @@ const useUserStore = create<IUserStore>()(
         set({ isLoading: false });
         if (axios.isAxiosError(err)) {
           const axiosError: AxiosError = err.response?.data;
-          toast.error(axiosError.message, {
+          toast.error(axiosError?.message ?? 'Ошибка авторизации', {
             position: 'bottom-right',
           });
         } else {
-          throw new Error('Ошибка авторизации. Повторите попытку...');
+          throw new Error('Ошибка авторизации');
         }
+      }
+    },
+    async getUserInfo() {
+      try {
+        const res: AxiosResponse<IAuth> = await axios.get(
+          'http://localhost:5000/auth/user-info',
+          {
+            headers: {
+              Authorization: localStorage.getItem('token'),
+            },
+          },
+        );
+        set({ currentUser: res.data.user });
+      } catch (err) {
+        console.log(err);
       }
     },
   })),

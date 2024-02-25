@@ -26,7 +26,9 @@ const ButtonUpload: FC = () => {
           const files = e.target.files;
           if (files) {
             const filesArray = Array.from(files);
-            filesArray.forEach(file => uploadFile(file, currentDirectory));
+            filesArray.forEach(file => {
+              uploadFile(file, currentDirectory);
+            });
           }
         }}
       />
