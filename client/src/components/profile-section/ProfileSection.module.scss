@@ -1,5 +1,5 @@
 .profileSection {
-  @apply relative mt-0 mb-[350px];
+  @apply relative mt-0 mb-[350px] sm:mb-0 md:mb-[150px] lg:mb-[150px];
   &:before {
     position: absolute;
     content: '';
@@ -11,5 +11,13 @@
     background: url('/images/contact/contact-form-bg.png') no-repeat top center /
       100% 100%;
     z-index: -1;
+  }
+}
+
+@media (max-width: 639px) {
+  .profileSection {
+    &:before {
+      background: none;
+    }
   }
 }

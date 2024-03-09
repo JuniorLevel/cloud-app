@@ -2,10 +2,24 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
 body {
   @apply font-Montserrat font-[400] text-sm text-text h-[100vh] leading-none overflow-x-hidden accent-primary;
 }
 
 section {
   @apply mt-[120px];
+}
+
+.slick-slide {
+  @apply !flex justify-center md:!flex;
+}
+
+@media (max-width: 639px) {
+  .MuiButtonBase-root {
+    font-size: 10px !important;
+  }
 }

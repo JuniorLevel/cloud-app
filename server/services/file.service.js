@@ -16,7 +16,6 @@ class FileService {
           return reject(new Error('Папка с таким именем уже существует'));
         }
       } catch (err) {
-        console.log(err);
         return reject(new Error('Ошибка при создании папки'));
       }
     });

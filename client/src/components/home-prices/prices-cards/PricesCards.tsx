@@ -1,3 +1,4 @@
+import AnimationWrapper from 'components/ui/animation-wrapper/AnimationWrapper';
 import ButtonLink from 'components/ui/button-link/ButtonLink';
 import { colors } from 'constants/colors.ts';
 import { FC } from 'react';
@@ -10,65 +11,65 @@ const PricesCards: FC = () => {
 
   return (
     <div className={styles.cards}>
-      <div className={styles.cardLeft}>
-        <div>
+      <AnimationWrapper args={{ rotate: 45, x: -500 }}>
+        <div className={styles.cardLeft}>
           <p className="text-text text-5xl font-bold mb-10">
-            {cardLeftInfo.days} days
+            {cardLeftInfo.days} дней
           </p>
           <p className="text-[64px] text-primary mb-[100px]">
-            ${cardLeftInfo.price}
+            {cardLeftInfo.price}₽
           </p>
           <hr className="text-[#8080806e] mb-20" />
           <ul>
             {cardLeftInfo.description.map(item => (
               <div key={item} className="flex justify-between">
                 <li>{item}</li>
-                <FaCheck size={25} color={colors.green} />
+                <FaCheck className="ml-[25px]" size={25} color={colors.green} />
               </div>
             ))}
           </ul>
         </div>
-      </div>
-      <div className={styles.cardMain}>
-        <div>
-          <span className="inline-block text-green mb-3">Most popular</span>
+      </AnimationWrapper>
+      <AnimationWrapper args={{ scale: 0.5 }}>
+        <div className={styles.cardMain}>
+          <span className="inline-block text-green mb-3">Популярный</span>
           <p className="text-text text-5xl font-bold mb-10">
-            {cardMainInfo.days} days
+            {cardMainInfo.days} дней
           </p>
           <p className="text-[64px] text-primary mb-[100px]">
-            ${cardMainInfo.price}
+            {cardMainInfo.price}₽
           </p>
           <hr className="text-[#8080806e] mb-20" />
           <ul>
             {cardMainInfo.description.map(item => (
               <div key={item} className="flex justify-between">
                 <li>{item}</li>
-                <FaCheck size={25} color={colors.green} />
+                <FaCheck className="ml-[25px]" size={25} color={colors.green} />
               </div>
             ))}
           </ul>
-          <ButtonLink text={isAuth ? 'Profile' : 'Sign in'} />
+          <ButtonLink text={isAuth ? 'Профиль' : 'Войти'} />
         </div>
-      </div>
-      <div className={styles.cardRight}>
-        <div>
+      </AnimationWrapper>
+      <AnimationWrapper args={{ rotate: -45, x: 500 }}>
+        <div className={styles.cardRight}>
           <p className="text-text text-5xl font-bold mb-10">
-            {cardRightInfo.days} days
+            {cardRightInfo.days} дней
           </p>
           <p className="text-[64px] text-primary mb-[100px]">
-            ${cardRightInfo.price}
+            {cardRightInfo.price}₽
           </p>
           <hr className="text-[#8080806e] mb-20" />
           <ul>
             {cardRightInfo.description.map(item => (
               <div key={item} className="flex justify-between">
                 <li>{item}</li>
-                <FaCheck size={25} color={colors.green} />
+                <FaCheck className="ml-[25px]" size={25} color={colors.green} />
               </div>
             ))}
           </ul>
         </div>
-      </div>
+      </AnimationWrapper>
     </div>
   );
 };

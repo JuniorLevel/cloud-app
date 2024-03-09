@@ -1,4 +1,4 @@
-import { FILES_ROUTE, REGISTER_ROUTE } from 'constants/consts-routes';
+import { LOGIN_ROUTE, PROFILE_ROUTE } from 'constants/consts-routes';
 import { FC } from 'react';
 import { Link } from 'react-router-dom';
 import useUserStore from 'store/user.store';
@@ -12,9 +12,9 @@ const ButtonLink: FC<IButtonLink> = ({ text, width = 300 }) => {
   const isAuth = useUserStore(state => state.isAuth);
 
   return (
-    <Link to={isAuth ? FILES_ROUTE : REGISTER_ROUTE}>
+    <Link to={isAuth ? PROFILE_ROUTE : LOGIN_ROUTE}>
       <button
-        className="text-white text-[20px] font-bold px-14 py-6 rounded-round bg-gradient hover:bg-hoverGradient w-full"
+        className="text-white text-[20px] font-bold px-21 py-6 rounded-round bg-gradient hover:bg-hoverGradient w-full"
         style={{ maxWidth: `${width}px` }}
       >
         {text}

@@ -14,7 +14,7 @@ const ButtonSubmit: FC<IButtonSubmit> = ({
   return (
     <button
       type="submit"
-      className="text-white text-[20px] font-bold px-14 py-6 rounded-round bg-gradient hover:bg-hoverGradient w-full"
+      className="text-white text-[20px] font-bold px-8 py-6 rounded-round bg-gradient hover:bg-hoverGradient w-full"
       style={{ maxWidth: `${width}px`, opacity: `${disabled ? 0.4 : 1}` }}
       disabled={disabled}
     >

@@ -43,12 +43,12 @@ const AuthPanel: FC = () => {
           <ul className={styles.authPanel__menuList}>
             <li>
               <Link to={PROFILE_ROUTE}>
-                <span>Profile</span>
+                <span>Профиль</span>
               </Link>
               <AccountCircleIcon fontSize="medium" />
             </li>
             <li onClick={() => logout()}>
-              <span>Logout</span>
+              <span>Выйти</span>
               <LogoutIcon fontSize="medium" />
             </li>
           </ul>

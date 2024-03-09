@@ -27,7 +27,7 @@ const CreateFolderPopup: FC = () => {
     >
       <div className={styles.popup__body} onClick={e => e.stopPropagation()}>
         <div className={styles.popup__bodyHeader}>
-          <p>Create Folder</p>
+          <p>Создать папку</p>
           <div
             className="bg-grey rounded-round p-1"
             onClick={() => setIsShowPopup(!isShowPopup)}
@@ -38,7 +38,7 @@ const CreateFolderPopup: FC = () => {
         <div className={styles.popup__bodyMain}>
           <div className="mb-5">
             <label htmlFor="nameFolder">
-              <p>Folder Name</p>
+              <p>Имя новой папки</p>
               <input
                 id="nameFolder"
                 maxLength={40}
@@ -55,8 +55,9 @@ const CreateFolderPopup: FC = () => {
             createDirectory(currentDirectory, nameFolder);
             setIsShowPopup(!isShowPopup);
           }}
+          className="hover:cursor-pointer"
         >
-          Create Folder
+          Создать
         </button>
       </div>
     </div>

@@ -1,0 +1,14 @@
+.profileInfoTable {
+  @apply text-[35px] mb-10 mx-auto border-solid border-2 border-[rgba(0,0,0,.1)] rounded-[10px] sm:text-[17px] md:text-[18px] lg:text-[20px] xl:text-[25px];
+  tbody {
+    tr {
+      td {
+        @apply p-8 sm:p-4;
+        &:first-child {
+          @apply text-primary;
+        }
+        @apply border border-[rgba(0,0,0,.1)] text-secondary;
+      }
+    }
+  }
+}

@@ -9,7 +9,7 @@ interface IFileStore {
   setIsShowPopup: (isShowPopup: boolean) => void;
   files: IFile[];
   currentDirectory: null | string;
-  getFiles: (parentOfFile: string | null) => Promise<any>;
+  getFiles: (parentOfFile: string | null) => Promise<void>;
   createDirectory: (
     parentOfFile: null | string,
     fileName: string,
@@ -51,7 +51,9 @@ const useFileStore = create<IFileStore>()(
             position: 'bottom-right',
           });
         } else {
-          throw new Error('Ошибка при попытке получить список файлов');
+          toast.error('Ошибка при попытке получить список файлов', {
+            position: 'bottom-right',
+          });
         }
       }
     },
@@ -90,8 +92,9 @@ const useFileStore = create<IFileStore>()(
             position: 'bottom-right',
           });
         } else {
-          console.log(err);
-          throw new Error('Ошибка при создании папки');
+          toast.error('Ошибка при создании папки', {
+            position: 'bottom-right',
+          });
         }
       }
     },
@@ -133,8 +136,9 @@ const useFileStore = create<IFileStore>()(
             position: 'bottom-right',
           });
         } else {
-          console.log(err);
-          throw new Error('Ошибка при загрузке файла');
+          toast.error('Ошибка при загрузке файла', {
+            position: 'bottom-right',
+          });
         }
       }
     },
@@ -160,14 +164,14 @@ const useFileStore = create<IFileStore>()(
           }
         } catch (err) {
           if (axios.isAxiosError(err)) {
-            console.log(err);
             const axiosError: AxiosError = err.response?.data;
             toast.error(axiosError?.message ?? 'Ошибка при скачивании файла', {
               position: 'bottom-right',
             });
           } else {
-            console.log(err);
-            throw new Error('Ошибка при скачивании файла');
+            toast.error('Ошибка при скачивании файла', {
+              position: 'bottom-right',
+            });
           }
         }
       }
@@ -188,14 +192,14 @@ const useFileStore = create<IFileStore>()(
           }));
         } catch (err) {
           if (axios.isAxiosError(err)) {
-            console.log(err);
             const axiosError: AxiosError = err.response?.data;
             toast.error(axiosError?.message ?? 'Ошибка при удалении файла', {
               position: 'bottom-right',
             });
           } else {
-            console.log(err);
-            throw new Error('Ошибка при удалении файла');
+            toast.error('Ошибка при удалении файла', {
+              position: 'bottom-right',
+            });
           }
         }
       }

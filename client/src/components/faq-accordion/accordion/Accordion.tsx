@@ -28,13 +28,6 @@ const useStyles = makeStyles(() => ({
     backgroundImage:
       'linear-gradient(90deg, #DFBEFF 30%, #8AB5FF 100%) !important',
   },
-  accordionTypographyTitle: {
-    fontSize: '40px !important',
-    fontWeight: '700 !important',
-  },
-  accordionTypographyInfo: {
-    fontSize: '25px !important',
-  },
 }));
 
 const AccordionItem: FC<IAccordionProps> = ({ title, info }) => {
@@ -43,6 +36,7 @@ const AccordionItem: FC<IAccordionProps> = ({ title, info }) => {
   const handleAccordionChange = () => {
     setIsAccordionOpen(!isAccordionOpen);
   };
+
   return (
     <Accordion
       className={`${classes.accordion}`}
@@ -53,12 +47,12 @@ const AccordionItem: FC<IAccordionProps> = ({ title, info }) => {
         className={`${isAccordionOpen ? classes.accordionSummaryOpen : ''}`}
         expandIcon={<ExpandMoreIcon />}
       >
-        <Typography className={classes.accordionTypographyTitle}>
+        <Typography className="!font-bold !text-[40px] sm:!text-[18px] md:!text-[18px] lg:!text-[18px] xl:!text-[25px]">
           {title}
         </Typography>
       </AccordionSummary>
       <AccordionDetails>
-        <Typography className={classes.accordionTypographyInfo}>
+        <Typography className="!text-[25px] sm:!text-[18px] md:!text-[18px] lg:!text-[18px] xl:!text-[18px]">
           {info}
         </Typography>
       </AccordionDetails>

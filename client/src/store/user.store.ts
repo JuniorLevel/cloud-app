@@ -80,7 +80,9 @@ const useUserStore = create<IUserStore>()(
             },
           );
         } else {
-          throw new Error('Ошибка регистрации. Повторите попытку...');
+          toast.error('Ошибка регистрации. Повторите попытку...', {
+            position: 'bottom-right',
+          });
         }
       }
     },
@@ -100,7 +102,6 @@ const useUserStore = create<IUserStore>()(
         toast.success('Вы успешно авторизованы!', {
           position: 'bottom-right',
         });
-        console.log(res.data.user, 'user');
       } catch (err) {
         if (axios.isAxiosError(err)) {
           const axiosError: AxiosError = err.response?.data;
@@ -112,7 +113,9 @@ const useUserStore = create<IUserStore>()(
             },
           );
         } else {
-          throw new Error('Ошибка при входе в аккаунт. Повторите попытку...');
+          toast.error('Ошибка при входе в аккаунт. Повторите попытку...', {
+            position: 'bottom-right',
+          });
         }
       }
     },
@@ -138,7 +141,9 @@ const useUserStore = create<IUserStore>()(
             position: 'bottom-right',
           });
         } else {
-          throw new Error('Ошибка авторизации');
+          toast.error('Ошибка авторизации', {
+            position: 'bottom-right',
+          });
         }
       }
     },

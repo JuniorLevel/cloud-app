@@ -13,3 +13,11 @@
     z-index: -1;
   }
 }
+
+@media (max-width: 639px) {
+  .filesSection {
+    &::before {
+      background: none;
+    }
+  }
+}

@@ -22,9 +22,7 @@ app.use('/files', FileRouter);
 const start = async () => {
   try {
     await mongoose.connect(process.env.DATABASE_URL);
-    app.listen(PORT, () => {
-      console.log(`Server started on ${process.env.PORT} port`);
-    });
+    app.listen(PORT);
   } catch (err) {
     throw new Error(err);
   }

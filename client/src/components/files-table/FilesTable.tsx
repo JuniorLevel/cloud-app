@@ -1,110 +1,48 @@
 import CloudDownloadIcon from '@mui/icons-material/CloudDownload';
 import DeleteIcon from '@mui/icons-material/Delete';
-import FolderOpenIcon from '@mui/icons-material/FolderOpen';
-import ImageIcon from '@mui/icons-material/Image';
-import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile';
 import ReplyIcon from '@mui/icons-material/Reply';
 import Box from '@mui/material/Box';
-import {
-  DataGrid,
-  GridColDef,
-  GridRowParams,
-  GridRowSelectionModel,
-  GridValidRowModel,
-  useGridApiRef,
-} from '@mui/x-data-grid';
+import { DataGrid } from '@mui/x-data-grid';
+import AnimationWrapper from 'components/ui/animation-wrapper/AnimationWrapper';
 import ButtonAddFolder from 'components/ui/button-add-folder/ButtonAddFolder';
 import ButtonUpload from 'components/ui/button-upload/ButtonUpload';
-import SearchFiles from 'components/ui/search-files/SearchFiles';
 import { colors } from 'constants/colors';
-import { filesize } from 'filesize';
-import { IFile } from 'interfaces/interfaces';
 import { DragEvent, FC, useEffect, useState } from 'react';
-import useFileStore from 'store/file.store';
-
+import { ColumnsTable } from './columns-table/ColumnsTable.tsx';
+import { useFilesTableActions } from './useFilesTableActions.ts';
 const FilesTable: FC = () => {
-  const files = useFileStore(state => state.files);
-  const setCurrentDirectory = useFileStore(state => state.setCurrentDirectory);
-  const currentDirectory = useFileStore(state => state.currentDirectory);
-  const uploadFile = useFileStore(state => state.uploadFile);
-  const pushToStack = useFileStore(state => state.pushToStack);
-  const stackOfDirectories = useFileStore(state => state.stackOfDirectories);
-  const downloadFile = useFileStore(state => state.downloadFile);
-  const deleteFile = useFileStore(state => state.deleteFile);
-  const [isSelectRow, setIsSelectRow] = useState(false);
-  const [isSelectedDir, setIsSelectedDir] = useState(false);
-  const [selectedRowsList, setSelectedRowsList] = useState<GridValidRowModel[]>(
-    [],
-  );
-  let apiRef = useGridApiRef();
+  const {
+    isSelectRow,
+    isSelectedDir,
+    files,
+    setPaginationModel,
+    apiRef,
+    paginationModel,
+    changeDirectoryHandler,
+    rowDoubleClickHandler,
+    rowSelectionModeChangeHandler,
+    downloadFileClickHandler,
+    deleteFileClickHandler,
+    currentDirectory,
+    uploadFile,
+  } = useFilesTableActions();
 
-  const [paginationModel, setPaginationModel] = useState({
-    pageSize: 10,
-    page: 0,
-  });
+  const [isDrag, setIsDrag] = useState(false);
 
   useEffect(() => {
-    setPaginationModel(prev => ({ ...prev, page: 0 }));
+    setIsDrag(false);
   }, [files]);
-
-  const columns: GridColDef[] = [
-    {
-      field: 'typeOfFile',
-      headerName: 'Тип',
-      width: 150,
-      disableColumnMenu: true,
-      renderCell: params => {
-        if (params.row.typeOfFile === 'dir') {
-          return <FolderOpenIcon color="primary" />;
-        }
-        if (
-          params.row.typeOfFile === 'png' ||
-          params.row.typeOfFile === 'jpeg' ||
-          params.row.typeOfFile === 'jpg' ||
-          params.row.typeOfFile === 'svg' ||
-          params.row.typeOfFile === 'webp' ||
-          params.row.typeOfFile === 'gif'
-        ) {
-          return <ImageIcon color="primary" />;
-        }
-        if (params.row.typeOfFile !== 'dir') {
-          return <InsertDriveFileIcon color="primary" />;
-        }
-      },
-    },
-    {
-      field: 'fileName',
-      headerName: 'Имя',
-      width: 500,
-      disableColumnMenu: true,
-    },
-    {
-      field: 'date',
-      headerName: 'Дата создания',
-      width: 250,
-      disableColumnMenu: true,
-      renderCell: params => params.row.date.slice(0, 10).replaceAll('-', '.'),
-    },
-    {
-      field: 'sizeOfFile',
-      headerName: 'Размер',
-      width: 150,
-      disableColumnMenu: true,
-      valueFormatter: param => {
-        if (param.value === 0) return '';
-        return filesize(param.value, { standard: 'jedec' });
-      },
-    },
-  ];
 
   function onDragEnterHandler(e: DragEvent) {
     e.preventDefault();
     e.stopPropagation();
+    setIsDrag(true);
   }
 
   function onDragLeaveHandler(e: DragEvent) {
     e.preventDefault();
     e.stopPropagation();
+    setIsDrag(false);
   }
 
   function onDropHandler(e: DragEvent) {
@@ -114,113 +52,73 @@ const FilesTable: FC = () => {
     files.forEach(file => uploadFile(file, currentDirectory));
   }
 
-  function changeDirectoryHandler() {
-    stackOfDirectories.pop();
-    !stackOfDirectories.length
-      ? setCurrentDirectory(null)
-      : setCurrentDirectory(
-          String(stackOfDirectories[stackOfDirectories.length - 1]),
-        );
-  }
-
-  function rowDoubleClickHandler(params: GridRowParams) {
-    if (params.row.typeOfFile === 'dir') {
-      if (params.id) {
-        pushToStack(String(params.id));
-      }
-      setCurrentDirectory(String(params.id));
-    }
-  }
-
-  function rowSelectionModeChangeHandler(newSelection: GridRowSelectionModel) {
-    if (!newSelection.length) {
-      setSelectedRowsList([]);
-      setIsSelectRow(false);
-    } else {
-      setIsSelectRow(true);
-      const selectedRows = Array.from(apiRef.current.getSelectedRows()).map(
-        row => row[1],
-      );
-      setSelectedRowsList(selectedRows);
-      if (selectedRows.some(row => row.typeOfFile === 'dir')) {
-        setIsSelectedDir(true);
-      } else {
-        setIsSelectedDir(false);
-      }
-    }
-  }
-
-  function downloadFileClickHandler() {
-    downloadFile(selectedRowsList as IFile[]);
-    apiRef.current.setRowSelectionModel([]);
-  }
-
-  function deleteFileClickHandler() {
-    deleteFile(selectedRowsList as IFile[]);
-    apiRef.current.setRowSelectionModel([]);
-  }
-
   return (
-    <Box
-      onDragEnter={onDragEnterHandler}
-      onDragOver={onDragEnterHandler}
-      onDragLeave={onDragLeaveHandler}
-      onDrop={onDropHandler}
-      sx={{
-        height: 630,
-        width: '100%',
-        '& .MuiDataGrid-cell:hover': {
-          color: colors.primary,
-          fontWeight: '500',
-          cursor: 'pointer',
-        },
-        '& .MuiDataGrid-row:hover': {
-          backgroundColor: colors.whiteInput,
-        },
-      }}
-    >
-      <div className="flex gap-4 justify-end mb-2 relative">
-        <SearchFiles />
-        <ButtonAddFolder />
-        <ButtonUpload />
-        {currentDirectory && (
-          <ReplyIcon
-            onClick={changeDirectoryHandler}
-            className="absolute top-[65px] left-[140px] z-50 rounded-round hover:cursor-pointer hover:bg-white block"
-            color="primary"
-          />
-        )}
-        {isSelectRow && (
-          <DeleteIcon
-            className="absolute top-[65px] right-[25px] z-10 hover:cursor-pointer hover:text-primary"
-            onClick={deleteFileClickHandler}
-          />
-        )}
-        {isSelectRow && !isSelectedDir && (
-          <CloudDownloadIcon
-            className="absolute top-[65px] right-[80px] z-10 hover:cursor-pointer hover:text-primary"
-            onClick={downloadFileClickHandler}
-          />
-        )}
-      </div>
-      <DataGrid
-        apiRef={apiRef}
-        onRowDoubleClick={rowDoubleClickHandler}
-        localeText={{
-          noRowsLabel: 'Создайте папку или перетащите файл',
+    <AnimationWrapper>
+      <Box
+        onDragEnter={onDragEnterHandler}
+        onDragOver={onDragEnterHandler}
+        onDragLeave={onDragLeaveHandler}
+        onDrop={onDropHandler}
+        sx={{
+          height: 630,
+          width: '100%',
+          '& .MuiDataGrid-cell:hover': {
+            color: colors.primary,
+            fontWeight: '500',
+            cursor: 'pointer',
+          },
+          '& .MuiDataGrid-row:hover': {
+            backgroundColor: colors.whiteInput,
+          },
         }}
-        rows={files}
-        columns={columns}
-        getRowId={file => file._id}
-        disableRowSelectionOnClick
-        className="bg-[white]"
-        paginationModel={paginationModel}
-        onPaginationModelChange={setPaginationModel}
-        pageSizeOptions={[5, 10]}
-        checkboxSelection
-        onRowSelectionModelChange={rowSelectionModeChangeHandler}
-      />
-    </Box>
+      >
+        <div className="flex gap-4 justify-end mb-2 relative">
+          <ButtonAddFolder />
+          <ButtonUpload />
+          {currentDirectory && (
+            <ReplyIcon
+              onClick={changeDirectoryHandler}
+              className="absolute top-[70px] left-[190px] z-50 rounded-round hover:cursor-pointer hover:bg-white block"
+              color="primary"
+            />
+          )}
+          {isSelectRow && (
+            <DeleteIcon
+              className="absolute top-[70px] right-[25px] z-10 hover:cursor-pointer hover:text-primary sm:left-[270px] md:left-[270px] lg:left-[270px]"
+              onClick={deleteFileClickHandler}
+            />
+          )}
+          {isSelectRow && !isSelectedDir && (
+            <CloudDownloadIcon
+              className="absolute top-[70px] right-[80px] z-10 hover:cursor-pointer hover:text-primary sm:left-[230px] md:left-[230px] lg:left-[230px]"
+              onClick={downloadFileClickHandler}
+            />
+          )}
+        </div>
+        <DataGrid
+          apiRef={apiRef}
+          onRowDoubleClick={rowDoubleClickHandler}
+          localeText={{
+            noRowsLabel: 'Создайте папку или перетащите файл',
+          }}
+          rows={files}
+          columns={ColumnsTable}
+          getRowId={file => file._id}
+          disableRowSelectionOnClick
+          className="bg-white"
+          sx={{
+            '& .MuiDataGrid-virtualScrollerContent': {
+              border: `${isDrag ? '2px dashed black' : ''}`,
+            },
+          }}
+          paginationModel={paginationModel}
+          onPaginationModelChange={setPaginationModel}
+          pageSizeOptions={[5, 10]}
+          checkboxSelection
+          onRowSelectionModelChange={rowSelectionModeChangeHandler}
+        />
+      </Box>
+    </AnimationWrapper>
   );
 };
 

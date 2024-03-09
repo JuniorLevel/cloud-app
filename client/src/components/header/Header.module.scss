@@ -1,8 +1,15 @@
 .header {
-  @apply min-h-[350px];
+  @apply min-h-[411px] sm:min-h-[315px];
   background: url(/images/home/header-bg.png) no-repeat top center / 100% 100%;
 }
 
 .headerItem {
   @apply text-white font-Comfortaa font-bold text-xl py-16 flex items-center;
+}
+
+@media (max-width: 1274px) {
+  .header {
+    background: url(/images/home/BG-header-mobile.png) no-repeat top center /
+      100% 100%;
+  }
 }

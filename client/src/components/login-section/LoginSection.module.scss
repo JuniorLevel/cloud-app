@@ -1,5 +1,5 @@
 .login {
-  @apply relative min-h-[950px] mt-0 mb-[350px];
+  @apply relative min-h-[950px] mt-0 mb-[350px] sm:min-h-[600px] sm:mb-0 md:min-h-[600px] md:mb-0 lg:min-h-[600px] lg:mb-0 xl:mb-0;
   &:before {
     position: absolute;
     content: '';
@@ -10,5 +10,13 @@
     background: url('/images/contact/contact-form-bg.png') no-repeat top center /
       100% 100%;
     z-index: -1;
+  }
+}
+
+@media (max-width: 639px) {
+  .login {
+    &::before {
+      background: none;
+    }
   }
 }

@@ -3,27 +3,27 @@ import { IAccordion } from 'interfaces/interfaces';
 export const accordionData: IAccordion[] = [
   {
     id: 1,
-    title: 'What is cloud data storage?',
-    info: 'This is a service that provides the ability to store data remotely over the Internet.',
+    title: 'Что такое облачное хранилище данных?',
+    info: 'Это сервис, который предоставляет возможность удаленного хранения данных через Интернет.',
   },
   {
     id: 2,
-    title: 'What advantages does cloud storage offer?',
-    info: 'Getting rid of the need to store data on physical media, flexibility and scalability, accessibility from anywhere in the world.',
+    title: 'Какие преимущества предлагает облачное хранилище?',
+    info: 'Избавление от необходимости хранить данные на физических носителях, гибкость и масштабируемость, доступность из любой точки мира.',
   },
   {
     id: 3,
-    title: 'How can I safely store data in the cloud?',
-    info: 'Data encryption, the use of complex passwords, multi-level protection, regular security audits.',
+    title: 'Как я могу безопасно хранить данные в облаке?',
+    info: 'Шифрование данных, использование сложных паролей, многоуровневая защита, регулярные проверки безопасности.',
   },
   {
     id: 4,
-    title: 'What are the main characteristics of cloud storage?',
-    info: 'Flexibility, scalability, availability, automatic data backup.',
+    title: 'Основные характеристики облачного хранилища?',
+    info: 'Гибкость, масштабируемость, доступность, автоматическое резервное копирование данных.',
   },
   {
     id: 5,
-    title: 'How is data accessed in the cloud storage?',
-    info: 'Via the Internet, using a personal account and credentials.',
+    title: 'Как получить доступ к данным в облачном хранилище?',
+    info: 'Через Интернет, используя личную учетную запись и учетные данные.',
   },
 ];

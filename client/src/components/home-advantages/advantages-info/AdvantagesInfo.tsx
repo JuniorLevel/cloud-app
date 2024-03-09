@@ -10,10 +10,10 @@ const AdvantagesInfo: FC = () => {
             <item.icon size={50} color="#FFFFFF" />
           </div>
           <div>
-            <h3 className="text-4xl text-title font-normal font-['Roboto'] uppercase tracking-wider mb-2">
+            <h3 className="text-4xl text-title font-normal font-['Roboto'] uppercase tracking-wider mb-2 text-[28px] sm:text-[20px] md:text-[20px]">
               {item.title}
             </h3>
-            <p className="text-lg font-normal font-['Montserrat']">
+            <p className="text-lg font-normal font-['Montserrat'] sm:text-[16px] md:text-[16px]">
               {item.text}
             </p>
           </div>

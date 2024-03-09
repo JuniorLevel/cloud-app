@@ -1,5 +1,5 @@
 .cards {
-  @apply flex gap-6 font-['Comfortaa'] text-center items-end;
+  @apply flex gap-6 font-['Comfortaa'] text-center items-end sm:hidden md:hidden lg:hidden xl:hidden;
   li {
     @apply mb-8 last:mb-0 text-2xl font-normal leading-normal;
   }
@@ -19,13 +19,13 @@
   }
 }
 .cardMain {
-  @apply relative max-w-[650px] w-full h-[1000px] bg-[#FFFFFF] rounded-[20px] py-20 px-40 shadow-cardShadow z-10;
+  @apply relative max-w-[650px] w-full bg-[#FFFFFF] rounded-[20px] py-[80px] px-[120px]  shadow-cardShadow z-10;
   &:before {
     @apply content-[''] absolute w-full h-full top-0 right-0 rounded-[20px] z-[-1];
     background: url('/images/home/BG-card-main.png') no-repeat;
   }
   ul {
-    @apply mb-[100px];
+    @apply 2xl:mb-[100px];
   }
 }
 .cardRight {

@@ -1,4 +1,4 @@
-import axios, { AxiosError, AxiosResponse } from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import { toast } from 'react-toastify';
 
 interface IFeedbackResponse {
@@ -26,12 +26,13 @@ class FeedbackServices {
       });
     } catch (err) {
       if (axios.isAxiosError(err)) {
-        const axiosError: AxiosError = err;
-        toast.error(`${axiosError.message}!`, {
+        toast.error('Сообщение было отправлено', {
           position: 'bottom-right',
         });
       } else {
-        throw new Error('Ошибка при отправке данных. Повторите попытку...');
+        toast.error('Ошибка при отправке данных. Повторите попытку...', {
+          position: 'bottom-right',
+        });
       }
     }
   }

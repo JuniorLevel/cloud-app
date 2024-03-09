@@ -10,22 +10,22 @@ export const FILES_ROUTE: string = '/files';
 export const PROFILE_ROUTE: string = '/profile';
 
 export const authRoutes: IRoutes[] = [
-  { name: 'My Files', path: FILES_ROUTE },
-  { name: 'Faq', path: FAQ_ROUTE },
-  { name: 'Contact', path: CONTACT_ROUTE },
+  { name: 'Мои файлы', path: FILES_ROUTE },
+  { name: 'Вопросы', path: FAQ_ROUTE },
+  { name: 'Контакты', path: CONTACT_ROUTE },
 ];
 
 export const guestRoutes: IRoutes[] = [
   {
-    name: 'Home',
+    name: 'Главная',
     path: HOME_ROUTE,
   },
   {
-    name: 'Pricing',
+    name: 'Тарифы',
     path: PRICING_ROUTE,
   },
   {
-    name: 'Contact',
+    name: 'Контакты',
     path: CONTACT_ROUTE,
   },
 ];

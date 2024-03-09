@@ -7,34 +7,34 @@ interface ICard {
 
 export const cardMainInfo: ICard = {
   id: 1,
-  price: 20.99,
+  price: 629,
   days: 30,
   description: [
-    '1 Tb Free space',
-    '4 Tb Monthly space',
-    '100 Mbit Speed',
-    '3000 sessions',
+    'Хранилище 250 Гб',
+    'Резервная копия',
+    'Шифр. данных',
+    'Поддержка 24/7',
   ],
 };
 export const cardLeftInfo: ICard = {
   id: 2,
-  price: 46.99,
+  price: 549,
   days: 90,
   description: [
-    '1 Tb Free space',
-    '4 Tb Monthly space',
-    '100 Mbit Speed',
-    '3000 sessions',
+    'Хранилище 50 Гб',
+    'Резервная копия',
+    'Шифр. данных',
+    'Поддержка 24/7',
   ],
 };
 export const cardRightInfo: ICard = {
   id: 3,
-  price: 127.99,
+  price: 4599,
   days: 365,
   description: [
-    '1 Tb Free space',
-    '4 Tb Monthly space',
-    '100 Mbit Speed',
-    '3000 sessions',
+    'Хранилище 500 Гб',
+    'Резервная копия',
+    'Шифр. данных',
+    'Поддержка 24/7',
   ],
 };

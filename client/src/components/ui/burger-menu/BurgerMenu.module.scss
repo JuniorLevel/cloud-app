@@ -1,0 +1,16 @@
+.burgerMenu {
+  @apply hidden absolute top-[73px] right-[10px] z-[50] text-white text-[20px] sm:block md:block lg:block;
+  &__body {
+    @apply bg-[#161401] w-full p-4 h-[50vh] sm:max-w-[300px] md:max-w-[300px] lg:max-w-[300px];
+    animation: translateMenu 0.7s linear;
+  }
+}
+
+@keyframes translateMenu {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0%);
+  }
+}

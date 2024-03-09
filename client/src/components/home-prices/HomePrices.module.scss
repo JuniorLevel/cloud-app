@@ -1,3 +1,9 @@
 .prices {
   background: url('/images/home/BG-prices.png') no-repeat center left;
 }
+
+@media (max-width: 639px) {
+  .prices {
+    background: none;
+  }
+}

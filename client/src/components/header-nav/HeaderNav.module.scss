@@ -1,7 +1,7 @@
 .headerNav {
   @apply flex-auto;
   ul {
-    @apply flex gap-[70px];
+    @apply flex gap-[70px] sm:flex-col sm:items-center sm:gap-5 md:flex-col md:gap-5 md:items-center lg:flex-col lg:gap-5 lg:items-center xl:gap-[40px];
     li {
       @apply duration-500 transition hover:text-title;
     }

@@ -1,7 +1,7 @@
 .advantages {
-  @apply max-w-[600px];
+  @apply max-w-[600px] md:max-w-full md:px-2 lg:max-w-full lg:px-4;
   li {
-    @apply mb-10 last:mb-0;
+    @apply mb-10 last:mb-0 sm:block sm:mb-0;
   }
 }
 
@@ -9,7 +9,7 @@
   @apply relative;
   &::before {
     content: '';
-    @apply absolute w-[90px] h-[90px] top-[-20px] left-[-20px];
+    @apply absolute w-[90px] h-[90px] top-[-20px] left-[-20px] sm:hidden;
     background-image: url('/images/home/icons/icon-bg.png');
     background-size: cover;
     background-position: top center;

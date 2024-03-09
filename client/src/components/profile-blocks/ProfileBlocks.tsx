@@ -7,22 +7,22 @@ const ProfileBlocks: FC = () => {
   const user = useUserStore(state => state.currentUser);
 
   return (
-    <ul className="flex justify-center gap-5">
+    <ul className="flex justify-center gap-5 sm:flex-col">
       <ProfileBlock
         id={1}
-        text="Disk space"
+        text="Всего места на диске"
         info={filesize(user?.diskSpace ?? 0, { standard: 'jedec' })}
         url="../../../images/profiles/crown1.svg"
       />
       <ProfileBlock
         id={2}
-        text="Used space"
+        text="Занято места на диске"
         info={filesize(user?.usedSpace ?? 0, { standard: 'jedec' })}
         url="../../../images/profiles/calendar.svg"
       />
       <ProfileBlock
         id={3}
-        text="File stored total"
+        text="Загружено файлов"
         info={user?.fileStoredTotal ?? 0}
         url="../../../images/profiles/storage.svg"
       />

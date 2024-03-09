@@ -4,7 +4,6 @@ const File = Schema({
   fileName: { type: String, required: true },
   date: { type: Date, default: Date.now() },
   typeOfFile: { type: String, required: true },
-  accessLinkToFile: { type: String },
   sizeOfFile: { type: Number, default: 0 },
   pathToFile: { type: String, default: '' },
   currentUser: { type: ObjectId, ref: 'User' },

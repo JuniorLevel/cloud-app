@@ -18,7 +18,7 @@ const ButtonUpload: FC = () => {
       variant="contained"
       startIcon={<CloudUploadIcon />}
     >
-      Upload file
+      Загрузить файл
       <VisuallyHiddenInput
         multiple
         type="file"

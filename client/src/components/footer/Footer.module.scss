@@ -1,5 +1,5 @@
 .footer {
-  @apply text-white font-['Comfortaa'] mt-[250px];
+  @apply text-white font-['Comfortaa'] mt-[250px] sm:mt-[80px] md:mt-[80px] lg:mt-[80px] xl:mt-[120px];
   background: url('/images/home/BG-footer.png') no-repeat top center / 100% 100%;
 }
 
@@ -15,5 +15,12 @@
     a {
       @apply duration-500 transition hover:text-title;
     }
+  }
+}
+
+@media (max-width: 1274px) {
+  .footer {
+    background: url(/images/home/BG-footer-mobile.png) no-repeat top center /
+      100% 100%;
   }
 }

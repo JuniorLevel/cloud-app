@@ -1,5 +1,5 @@
 .image {
-  @apply max-w-[800px] w-full;
+  @apply max-w-[800px] w-full sm:hidden md:hidden lg:hidden;
   background-image: url('/images/home/BG-adv.png');
   background-position: top center;
   background-size: contain;

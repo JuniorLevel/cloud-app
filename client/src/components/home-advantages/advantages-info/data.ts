@@ -13,26 +13,26 @@ interface IData {
 export const data: IData[] = [
   {
     id: 1,
-    title: 'SAFE AND SECURE',
-    text: 'Safely store and backup all your essential files. From family photos & videos to important documents, you can rely on us to store all your media securely and forever.',
+    title: 'БЕЗОПАСНЫЙ И ЗАЩИЩЕННЫЙ',
+    text: 'Надежно храните и создавайте резервные копии всех ваших важных файлов. От семейных фотографий и видео до важных документов - вы можете положиться на нас в том, что мы сохраним все ваши носители надежно и навсегда.',
     icon: RiSecurePaymentLine,
   },
   {
     id: 2,
-    title: 'Access from anywhere',
-    text: 'Easily access your files from anywhere with desktop apps for Windows and Mac, and mobile apps for iPhone, iPad, Android, and the web.',
+    title: 'Доступ из любого места',
+    text: 'Легко получайте доступ к своим файлам из любого места с помощью настольных приложений для Windows и Mac, а также мобильных приложений для iPhone, iPad, Android и Интернета.',
     icon: SiMicrosoftaccess,
   },
   {
     id: 3,
-    title: 'STORE AND MANAGE ALL YOUR FILES!',
-    text: 'Upload multiple files at once and keep them forever on this site. If you are using FireFox or Chrome, you can simply drag & drop your files to begin uploading.',
+    title: 'ХРАНИТЕ ВАШИ ФАЙЛЫ И УПРАВЛЯЙТЕ ИМИ',
+    text: 'Загружайте несколько файлов одновременно и сохраняйте их навсегда на этом сайте. Если вы используете FireFox или Chrome, вы можете просто перетащить свои файлы, чтобы начать загрузку.',
     icon: MdOutlineManageHistory,
   },
   {
     id: 4,
-    title: 'Any point of the globe',
-    text: 'High speed from any location with internet access! Gigabit networking and high-performance server!',
+    title: 'В любой точке земного шара',
+    text: 'Высокая скорость загрузки файлов из любого места с доступом в Интернет! Гигабитная сеть и высокопроизводительный сервер.',
     icon: IoMdSpeedometer,
   },
 ];

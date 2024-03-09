@@ -3,7 +3,6 @@ const File = require('../models/File');
 const User = require('../models/User');
 const fs = require('fs');
 const path = require('path');
-const fileService = require('../services/file.service');
 class FileController {
   async createDirectory(req, res) {
     try {
@@ -107,7 +106,7 @@ class FileController {
       if (!file) {
         return res.status(400).json({ message: 'Ошибка при скачивании файла' });
       }
-      const pathToFile = fileService.getPath(file);
+      const pathToFile = FileService.getPath(file);
       if (fs.existsSync(pathToFile)) {
         return res.download(pathToFile, file.fileName);
       } else {
@@ -126,7 +125,7 @@ class FileController {
       });
       const user = await User.findOne({ _id: req.user.id });
       if (!file) return res.status(400).json({ message: 'Файл не найден' });
-      fileService.deleteFile(file);
+      FileService.deleteFile(file);
       await file.deleteOne();
       if (file.typeOfFile !== 'dir') {
         await User.findOneAndUpdate(
@@ -134,17 +133,15 @@ class FileController {
           { $inc: { fileStoredTotal: -1 } },
           { new: true },
         );
-        if (user.usedSpace < 0) {
-          user.usedSpace = 0;
-        } else {
-          user.usedSpace -= file.sizeOfFile;
-        }
+        user.usedSpace -= file.sizeOfFile;
+        if (user.usedSpace < 0) user.usedSpace = 0;
       }
       await user.save();
       return res.json(file);
     } catch (err) {
-      console.log(err);
-      return res.status(400).json({ message: 'Папка не пуста' });
+      return res
+        .status(400)
+        .json({ message: 'Папка не пуста. Удалите вложенные файлы' });
     }
   }
 }

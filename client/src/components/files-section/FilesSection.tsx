@@ -1,5 +1,6 @@
 import Container from 'components/container/Container';
 import FilesTable from 'components/files-table/FilesTable';
+import AnimationWrapper from 'components/ui/animation-wrapper/AnimationWrapper';
 import ContentText from 'components/ui/content-text/ContentText';
 import CreateFolderPopup from 'components/ui/create-folder-popup/CreateFolderPopup';
 import Title from 'components/ui/title/Title';
@@ -17,8 +18,10 @@ const FilesSection: FC = () => {
   return (
     <section className={styles.filesSection}>
       <Container width={1200}>
-        <Title text="My Files" />
-        <ContentText />
+        <AnimationWrapper args={{ x: -50, rotate: 5 }}>
+          <Title text="Мои файлы" />
+          <ContentText />
+        </AnimationWrapper>
         <FilesTable />
         <CreateFolderPopup />
       </Container>
