@@ -33,8 +33,8 @@ const useFileStore = create<IFileStore>()(
     },
     async getFiles(parentOfFile: null | string) {
       try {
-        const res: AxiosResponse<any> = await axios.get(
-          `http://localhost:5000/files${
+        const res: AxiosResponse<IFile[]> = await axios.get(
+          `${import.meta.env.VITE_API_URL}/files${
             parentOfFile ? '?parentOfFile=' + parentOfFile : ''
           }`,
           {
@@ -62,7 +62,7 @@ const useFileStore = create<IFileStore>()(
         await toast
           .promise(
             axios.post(
-              'http://localhost:5000/files',
+              `${import.meta.env.VITE_API_URL}/files`,
               {
                 fileName,
                 typeOfFile: 'dir',
@@ -86,9 +86,10 @@ const useFileStore = create<IFileStore>()(
             }));
           });
       } catch (err) {
+        console.log(err);
         if (axios.isAxiosError(err)) {
           const axiosError: AxiosError = err.response?.data;
-          toast.error(axiosError?.message ?? 'Ошибка при создании файла', {
+          toast.error(axiosError?.message ?? 'Ошибка при создании папки', {
             position: 'bottom-right',
           });
         } else {
@@ -113,11 +114,15 @@ const useFileStore = create<IFileStore>()(
         if (directoryId) formData.append('parentOfFile', String(directoryId));
         await toast
           .promise(
-            axios.post('http://localhost:5000/files/upload', formData, {
-              headers: {
-                Authorization: `${localStorage.getItem('token')}`,
+            axios.post(
+              `${import.meta.env.VITE_API_URL}/files/upload`,
+              formData,
+              {
+                headers: {
+                  Authorization: `${localStorage.getItem('token')}`,
+                },
               },
-            }),
+            ),
             {
               pending: 'Загрузка файла',
               success: 'Файл загружен',
@@ -146,7 +151,7 @@ const useFileStore = create<IFileStore>()(
       for (const file of files) {
         try {
           const res = await axios.get(
-            `http://localhost:5000/files/download?id=${file._id}`,
+            `${import.meta.env.VITE_API_URL}/files/download?id=${file._id}`,
             {
               responseType: 'blob',
               headers: {
@@ -177,10 +182,10 @@ const useFileStore = create<IFileStore>()(
       }
     },
     async deleteFile(files: IFile[]) {
-      for (let file of files) {
+      for (const file of files) {
         try {
           const res = await axios.delete(
-            `http://localhost:5000/files/?id=${file._id}`,
+            `${import.meta.env.VITE_API_URL}/files/?id=${file._id}`,
             {
               headers: {
                 Authorization: `${localStorage.getItem('token')}`,

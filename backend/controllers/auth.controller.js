@@ -24,6 +24,7 @@ class AuthController {
       });
       await user.save();
       await FileService.createFolder(
+        req,
         new File({ currentUser: user.id, fileName: '' }),
       );
       return res.json({
@@ -41,6 +42,7 @@ class AuthController {
         },
       });
     } catch (e) {
+      console.log(e, 'ERROR');
       return res.send({ message: 'Ошибка на стороне сервера!' });
     }
   }

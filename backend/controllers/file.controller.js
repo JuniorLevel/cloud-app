@@ -18,10 +18,10 @@ class FileController {
       });
       if (!parentFile) {
         file.pathToFile = fileName;
-        await FileService.createFolder(file);
+        await FileService.createFolder(req, file);
       } else {
         file.pathToFile = `${parentFile.pathToFile}/${file.fileName}`;
-        await FileService.createFolder(file);
+        await FileService.createFolder(req, file);
         parentFile.childsOfFile.push(file.id);
         await parentFile.save();
       }
@@ -59,13 +59,10 @@ class FileController {
         user.usedSpace += file.size;
       }
       if (!parentFolder) {
-        pathToUpload = path.join(__dirname, `../files/${user.id}/${file.name}`);
+        pathToUpload = `${req.filePath}/${user.id}/${file.name}`;
       }
       if (parentFolder) {
-        pathToUpload = path.join(
-          __dirname,
-          `../files/${parentFolder.currentUser}/${parentFolder.pathToFile}/${file.name}`,
-        );
+        pathToUpload = `${req.filePath}/${parentFolder.currentUser}/${parentFolder.pathToFile}/${file.name}`;
       }
       if (fs.existsSync(pathToUpload)) {
         return res.status(400).json({ message: 'Файл уже загружен' });
@@ -106,7 +103,7 @@ class FileController {
       if (!file) {
         return res.status(400).json({ message: 'Ошибка при скачивании файла' });
       }
-      const pathToFile = FileService.getPath(file);
+      const pathToFile = FileService.getPath(req, file);
       if (fs.existsSync(pathToFile)) {
         return res.download(pathToFile, file.fileName);
       } else {
@@ -125,7 +122,7 @@ class FileController {
       });
       const user = await User.findOne({ _id: req.user.id });
       if (!file) return res.status(400).json({ message: 'Файл не найден' });
-      FileService.deleteFile(file);
+      FileService.deleteFile(req, file);
       await file.deleteOne();
       if (file.typeOfFile !== 'dir') {
         await User.findOneAndUpdate(
