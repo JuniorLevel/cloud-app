@@ -5,6 +5,7 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 body {
   @apply font-Montserrat font-[400] text-sm text-text h-[100vh] leading-none overflow-x-hidden accent-primary;
