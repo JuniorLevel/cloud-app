@@ -53,7 +53,7 @@ const useUserStore = create<IUserStore>()(
     ) {
       try {
         const res: AxiosResponse<IRegistrationResponse> = await axios.post(
-          'http://localhost:5000/auth/reg',
+          `${import.meta.env.VITE_API_URL}/auth/reg`,
           {
             username,
             age,
@@ -89,7 +89,7 @@ const useUserStore = create<IUserStore>()(
     async login(email, password) {
       try {
         const res: AxiosResponse<ILogin> = await axios.post(
-          'http://localhost:5000/auth/login',
+          `${import.meta.env.VITE_API_URL}/auth/login`,
           {
             email,
             password,
@@ -122,7 +122,7 @@ const useUserStore = create<IUserStore>()(
     async auth() {
       try {
         const res: AxiosResponse<IAuth> = await axios.get(
-          'http://localhost:5000/auth/auth',
+          `${import.meta.env.VITE_API_URL}/auth/auth`,
           {
             headers: {
               Authorization: localStorage.getItem('token'),
@@ -150,7 +150,7 @@ const useUserStore = create<IUserStore>()(
     async getUserInfo() {
       try {
         const res: AxiosResponse<IAuth> = await axios.get(
-          'http://localhost:5000/auth/user-info',
+          `${import.meta.env.VITE_API_URL}/auth/user-info`,
           {
             headers: {
               Authorization: localStorage.getItem('token'),

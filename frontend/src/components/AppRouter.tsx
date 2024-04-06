@@ -40,7 +40,7 @@ const AppRouter: FC = () => {
       hasExecutedEffectRef.current = true;
     }
     return () => clearTimeout(delayAuth);
-  }, []);
+  }, [auth]);
 
   useEffect(() => {
     if (!isAuth) {
