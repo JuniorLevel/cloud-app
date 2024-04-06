@@ -1,5 +1,5 @@
 .cards {
-  @apply flex justify-between font-['Comfortaa'] text-center items-end sm:hidden md:hidden lg:hidden xl:hidden;
+  @apply flex gap-6 font-['Comfortaa'] text-center items-end sm:hidden md:hidden lg:hidden xl:hidden;
   li {
     @apply mb-8 last:mb-0 text-2xl font-normal leading-normal;
   }
@@ -33,11 +33,5 @@
   &:before {
     @apply content-[''] absolute w-full h-full top-0 right-0 rounded-[20px] z-[-1];
     background: url('/images/home/BG-card-right.png') no-repeat;
-  }
-}
-
-@media (min-width: 1275px) and (max-width: 1527px) {
-  .cards {
-    @apply gap-6;
   }
 }

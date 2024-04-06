@@ -1,5 +1,6 @@
 import axios, { AxiosResponse } from 'axios';
 import { toast } from 'react-toastify';
+
 interface IFeedbackResponse {
   message: string;
 }
@@ -7,9 +8,7 @@ interface IFeedbackResponse {
 class FeedbackServices {
   private URL: string;
   constructor() {
-    // this.URL = 'https://cloud-app-deploy.onrender.com/contact';
-    this.URL = `${import.meta.env.VITE_API_URL}/contact`;
-    // this.URL = 'http://localhost:8800/contact';
+    this.URL = 'http://localhost:5000/contact';
   }
 
   async send(email: string, username: string, message: string) {
