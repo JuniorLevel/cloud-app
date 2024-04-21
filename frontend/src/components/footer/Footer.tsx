@@ -15,43 +15,47 @@ const Footer: FC = () => {
 
   useGSAP(() => {
     gsap.registerPlugin(ScrollTrigger);
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        scrub: true,
-        start: 'top bottom',
-        end: 'center center',
-        trigger: block1.current,
-      },
+    const mm = gsap.matchMedia();
+
+    mm.add('(min-width: 1024px)', () => {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          scrub: true,
+          start: 'top bottom',
+          end: 'center center',
+          trigger: block1.current,
+        },
+      });
+      tl.fromTo(
+        block1.current,
+        {
+          opacity: 0,
+          x: -500,
+        },
+        {
+          opacity: 1,
+          rotate: 0,
+          x: 0,
+          y: 0,
+          scale: 1,
+          duration: 5,
+        },
+      ).fromTo(
+        block2.current,
+        {
+          opacity: 0,
+          scale: 0.5,
+        },
+        {
+          opacity: 1,
+          rotate: 0,
+          x: 0,
+          y: 0,
+          scale: 1,
+          duration: 5,
+        },
+      );
     });
-    tl.fromTo(
-      block1.current,
-      {
-        opacity: 0,
-        x: -500,
-      },
-      {
-        opacity: 1,
-        rotate: 0,
-        x: 0,
-        y: 0,
-        scale: 1,
-        duration: 5,
-      },
-    ).fromTo(
-      block2.current,
-      {
-        opacity: 0,
-        scale: 0.5,
-      },
-      {
-        opacity: 1,
-        rotate: 0,
-        x: 0,
-        y: 0,
-        scale: 1,
-        duration: 5,
-      },
-    );
   });
 
   return (

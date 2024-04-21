@@ -9,44 +9,48 @@ const HomeStatistics: FC = () => {
   const el2 = useRef(null);
   useGSAP(() => {
     gsap.registerPlugin(ScrollTrigger);
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        scrub: true,
-        start: 'top bottom',
-        end: 'bottom center',
-        trigger: el1.current,
-      },
-    });
+    const mm = gsap.matchMedia();
 
-    tl.fromTo(
-      el1.current,
-      {
-        opacity: 0,
-        x: -1500,
-        rotate: 360,
-      },
-      {
-        opacity: 1,
-        rotate: 0,
-        x: 0,
-        duration: 1,
-      },
-    ).fromTo(
-      el2.current,
-      {
-        opacity: 0,
-        x: 1500,
-        rotate: 360,
-      },
-      {
-        opacity: 1,
-        rotate: 0,
-        x: 0,
-        y: 0,
-        scale: 1,
-        duration: 1,
-      },
-    );
+    mm.add('(min-width: 1024px)', () => {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          scrub: true,
+          start: 'top bottom',
+          end: 'bottom center',
+          trigger: el1.current,
+        },
+      });
+
+      tl.fromTo(
+        el1.current,
+        {
+          opacity: 0,
+          x: -1500,
+          rotate: 360,
+        },
+        {
+          opacity: 1,
+          rotate: 0,
+          x: 0,
+          duration: 1,
+        },
+      ).fromTo(
+        el2.current,
+        {
+          opacity: 0,
+          x: 1500,
+          rotate: 360,
+        },
+        {
+          opacity: 1,
+          rotate: 0,
+          x: 0,
+          y: 0,
+          scale: 1,
+          duration: 1,
+        },
+      );
+    });
   });
 
   return (

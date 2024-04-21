@@ -15,46 +15,52 @@ const ProfileSection: FC = () => {
   const blocksRef = useRef(null);
   useGSAP(() => {
     const tl = gsap.timeline();
-    tl.fromTo(
-      titleRef.current,
-      {
-        opacity: 0,
-        y: -500,
-      },
-      {
-        opacity: 1,
-        y: 0,
-      },
-    )
-      .fromTo(
-        avatarRef.current,
-        {
-          rotate: 360,
-        },
-        {
-          rotate: 0,
-        },
-      )
-      .fromTo(
-        tableRef.current,
-        {
-          opacity: 0,
-          scale: 0.5,
-        },
-        {
-          opacity: 1,
-          scale: 1,
-        },
-      )
-      .fromTo(
-        blocksRef.current,
-        {
-          y: 500,
-        },
-        {
-          y: 0,
-        },
-      );
+    const mm = gsap.matchMedia();
+    mm.add(
+      '(min-width: 1024px)',
+      () => {},
+      tl
+        .fromTo(
+          titleRef.current,
+          {
+            opacity: 0,
+            y: -500,
+          },
+          {
+            opacity: 1,
+            y: 0,
+          },
+        )
+        .fromTo(
+          avatarRef.current,
+          {
+            rotate: 360,
+          },
+          {
+            rotate: 0,
+          },
+        )
+        .fromTo(
+          tableRef.current,
+          {
+            opacity: 0,
+            scale: 0.5,
+          },
+          {
+            opacity: 1,
+            scale: 1,
+          },
+        )
+        .fromTo(
+          blocksRef.current,
+          {
+            y: 500,
+          },
+          {
+            y: 0,
+          },
+        ),
+    );
   });
 
   return (
