@@ -22,7 +22,7 @@ export function useFilesTableActions() {
   const [selectedRowsList, setSelectedRowsList] = useState<GridValidRowModel[]>(
     [],
   );
-  let apiRef = useGridApiRef();
+  const apiRef = useGridApiRef();
 
   const [paginationModel, setPaginationModel] = useState({
     pageSize: 10,
