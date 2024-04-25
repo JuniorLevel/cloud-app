@@ -44,10 +44,15 @@ export const ColumnsTable: GridColDef[] = [
     headerName: 'Размер',
     width: 150,
     disableColumnMenu: true,
-    valueFormatter: ({ value }) => {
-      const cv = value as number;
-      if (cv === 0) return 0;
-      return filesize(cv, { standard: 'jedec' });
+    valueFormatter: param => {
+      const pm = param.value as number;
+      if (pm === 0) return '';
+      return filesize(pm, { standard: 'jedec' });
     },
+    // valueFormatter: ({ value }) => {
+    //   const cv = value as number;
+    //   if (cv === 0) return 0;
+    //   return filesize(cv, { standard: 'jedec' });
+    // },
   },
 ];
