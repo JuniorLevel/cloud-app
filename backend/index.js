@@ -26,9 +26,10 @@ app.use('/files', FileRouter);
 const start = async () => {
   try {
     await mongoose.connect(process.env.DATABASE_URL);
-    app.listen(PORT);
-    console.log(`Server started on port ${PORT}`);
-    console.log('Connected to MongoDB');
+    app.listen(PORT, () => {
+      console.log(`Server started on port ${PORT}`);
+      console.log('Connected to MongoDB');
+    });
   } catch (err) {
     throw new Error(err);
   }
