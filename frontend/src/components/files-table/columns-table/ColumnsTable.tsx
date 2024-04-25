@@ -48,7 +48,10 @@ export const ColumnsTable: GridColDef[] = [
     //   return filesize(Number(param.value), { standard: 'jedec' });
     // },
     valueFormatter: (param: { value: number | string }) => {
-      filesize(Number(param.value), { standard: 'jedec' });
+      if (param.value === '') {
+        return 0;
+      }
+      return filesize(Number(param.value), { standard: 'jedec' });
     },
   },
 ];
