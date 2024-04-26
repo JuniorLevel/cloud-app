@@ -44,8 +44,6 @@ export const ColumnsTable: GridColDef[] = [
     headerName: 'Размер',
     width: 150,
     disableColumnMenu: true,
-    renderCell: params => {
-      filesize(Number(params.value), { standard: 'jedec' });
-    },
+    renderCell: params => filesize(params?.value ?? 0, { standard: 'jedec' }),
   },
 ];
