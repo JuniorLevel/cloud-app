@@ -2,7 +2,6 @@ import FolderOpenIcon from '@mui/icons-material/FolderOpen';
 import ImageIcon from '@mui/icons-material/Image';
 import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile';
 import { GridColDef } from '@mui/x-data-grid';
-import { filesize } from 'filesize';
 export const ColumnsTable: GridColDef[] = [
   {
     field: 'typeOfFile',
@@ -47,11 +46,11 @@ export const ColumnsTable: GridColDef[] = [
     // valueFormatter: param => {
     //   return filesize(Number(param.value), { standard: 'jedec' });
     // },
-    valueFormatter: (param: { value: number | string }) => {
-      if (param.value === '') {
-        return 0;
-      }
-      return filesize(Number(param.value), { standard: 'jedec' });
-    },
+    // valueFormatter: (param: { value: number | string }) => {
+    //   if (param.value === '') {
+    //     return 0;
+    //   }
+    //   return filesize(Number(param.value), { standard: 'jedec' });
+    // },
   },
 ];
