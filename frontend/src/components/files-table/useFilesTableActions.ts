@@ -57,7 +57,7 @@ export function useFilesTableActions() {
       setIsSelectRow(false);
     } else {
       setIsSelectRow(true);
-      const selectedRows = Array.from(apiRef.current.getSelectedRows()).map(
+      const selectedRows = Array.from(apiRef?.current!.getSelectedRows()).map(
         row => row[1],
       );
       setSelectedRowsList(selectedRows);
@@ -71,12 +71,12 @@ export function useFilesTableActions() {
 
   function downloadFileClickHandler() {
     downloadFile(selectedRowsList as IFile[]);
-    apiRef.current.setRowSelectionModel([]);
+    apiRef?.current?.setRowSelectionModel([]);
   }
 
   function deleteFileClickHandler() {
     deleteFile(selectedRowsList as IFile[]);
-    apiRef.current.setRowSelectionModel([]);
+    apiRef?.current?.setRowSelectionModel([]);
   }
 
   return {
