@@ -2,7 +2,7 @@ import { IconType } from 'react-icons';
 import { IoMdSpeedometer } from 'react-icons/io';
 import { MdOutlineManageHistory } from 'react-icons/md';
 import { RiSecurePaymentLine } from 'react-icons/ri';
-import { SiMicrosoftaccess } from 'react-icons/si';
+import { SiOpenaccess } from 'react-icons/si';
 interface IData {
   id: number;
   icon: IconType;
@@ -21,7 +21,7 @@ export const data: IData[] = [
     id: 2,
     title: 'Доступ из любого места',
     text: 'Легко получайте доступ к своим файлам из любого места с помощью настольных приложений для Windows и Mac, а также мобильных приложений для iPhone, iPad, Android и Интернета.',
-    icon: SiMicrosoftaccess,
+    icon: SiOpenaccess,
   },
   {
     id: 3,
